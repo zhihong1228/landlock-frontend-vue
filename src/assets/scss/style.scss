@@ -1,0 +1,509 @@
+/*================================================================================
+
+NOTE:
+------
+PLACE HERE YOUR OWN SCSS CODES AND IF NEEDED, OVERRIDE THE STYLES FROM THE OTHER STYLESHEETS.
+WE WILL RELEASE FUTURE UPDATES SO IN ORDER TO NOT OVERWRITE YOUR STYLES IT'S BETTER LIKE THIS.  */
+
+@font-face {
+  font-family: 'Avenir';
+  src: url('../fonts/AvenirNextLTPro-Regular.otf');
+  src: local('Avenir Regular'), local('Avenir-Regular'),
+    url('../fonts/AvenirNextLTPro-Regular.otf') format('opentype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Avenir Regular';
+  font-style: normal;
+  font-weight: normal;
+  src: local('Avenir Regular'), url('../fonts/AvenirNextLTPro-Regular.otf') format('opentype');
+}
+
+@media all and (min-width: 500px) {
+  // scrollbar tweaks
+  * {
+    scrollbar-width: thin;
+    scrollbar-height: thin;
+    scrollbar-color: #555 #ddd;
+  }
+  /* width */
+  ::-webkit-scrollbar {
+    width: 11px;
+    height: 11px;
+  }
+
+  /* Track */
+  ::-webkit-scrollbar-track {
+    background: #f1f1f1;
+  }
+
+  /* Handle */
+  ::-webkit-scrollbar-thumb {
+    background: #aaaaaa;
+  }
+
+  /* Handle on hover */
+  ::-webkit-scrollbar-thumb:hover {
+    background: #555;
+  }
+}
+
+.btn {
+  border-radius: 40px;
+  //padding: 14px 26px;
+}
+.btn-outline-dark {
+  border-radius: .358rem;
+}
+
+.btn-smssss {
+  font-size: 15px;
+}
+
+[dir='ltr'] .modal-header .close {
+  margin: -0.3rem -0.1rem -0.8rem auto !important;
+  background: transparent !important;
+  box-shadow: unset !important;
+}
+
+.round-chip {
+  color: white;
+  min-width: 30px;
+  min-height: 30px;
+  border-radius: 50%;
+  text-align: center;
+  line-height: 30px;
+  display: inline-block;
+}
+
+.line-spacer {
+  -webkit-box-flex: 2;
+  flex-grow: 2;
+  border-bottom: 1px dotted rgb(185, 185, 185);
+  align-self: flex-end;
+  margin: 0 10px;
+}
+
+.dark-layout h1,
+.dark-layout h2,
+.dark-layout h3,
+.dark-layout h4,
+.dark-layout h5,
+.dark-layout h6,
+.dark-layout .h1,
+.dark-layout .h2,
+.dark-layout .h3,
+.dark-layout .h4,
+.dark-layout .h5,
+.dark-layout .h6 {
+  color: #dddddd !important;
+}
+
+.dark-layout .text-dark {
+  color: #dddddd !important;
+}
+
+.text-dark {
+  color: #000000 !important;
+}
+
+[dir] .btn-xl,
+[dir] .btn-group-xl > .btn {
+  padding: 1.3rem 2.8rem;
+  border-radius: 0.398rem;
+  font-size: 1.3rem;
+}
+
+.brand-logo img {
+  max-width: 200px !important;
+}
+
+.dense .card-body {
+  padding-left: 2%;
+  padding-right: 2%;
+}
+
+.table {
+  background: white;
+}
+
+tr:focus {
+  outline: 0;
+}
+
+.hidden_table_header {
+  display: none;
+}
+
+.dense .table .b-table-details > td {
+  padding: 0 !important;
+}
+
+.dense .table .b-table-details {
+  padding-left: 0rem !important;
+  padding-right: 0rem !important;
+}
+
+//makes table denser
+.dense .table th,
+.dense .table td {
+  padding: 0.72rem;
+}
+
+.dense .table.table-sm th,
+.dense .table.table-sm td {
+  padding: 0.3rem 0.5rem;
+}
+
+.iti.iti--allow-dropdown.iti--separate-dial-code {
+  display: block;
+}
+
+.modal-header {
+  background-color: transparent !important;
+}
+
+//.modal-backdrop{
+//  background-color: var(--primary) !important;
+//  opacity:1 !important;
+//}
+#identityWizardModal {
+  padding: 0 !important;
+}
+
+#identityWizardModal .modal-body {
+  padding: 0 !important;
+}
+
+#identityWizardModal .modal-body > div {
+  margin-bottom: 0 !important;
+}
+
+#identityWizardModal .vue-form-wizard .wizard-tab-content {
+  padding-top: 20px !important;
+}
+
+.custom-wizard-pky .stepTitle {
+  display: none;
+}
+
+.custom-wizard-pky ul.wizard-nav.wizard-nav-pills {
+  flex-wrap: nowrap !important;
+  justify-content: center;
+  overflow-x: auto;
+  //margin-left: 3rem;
+  padding: 10px !important;
+}
+
+.custom-wizard-pky ul.wizard-nav.wizard-nav-pills li {
+  padding-bottom: 7px !important;
+}
+
+.custom-wizard-pky ul.wizard-nav.wizard-nav-pills li a {
+  display: flex;
+  flex-flow: row nowrap;
+  align-items: center;
+  justify-content: start;
+}
+
+.custom-control-pky * {
+  user-select: none;
+}
+
+.custom-control-pky .vs__dropdown-toggle {
+  padding: 7px 0 13px 0;
+}
+
+.custom-control-pky .v-select {
+  font-weight: bold;
+}
+
+.custom-control-pky .vs--open .vs__dropdown-toggle {
+  border-width: 2px;
+}
+
+.custom-control-pky .form-control {
+  padding: 26px 1rem;
+  font-weight: bold;
+}
+
+.custom-control-pky .b-form-btn-label-control.form-control {
+  padding: 0;
+}
+
+.custom-control-pky .form-control-lg {
+  padding: 0.75rem 1.143rem;
+}
+
+.custom-control-pky .form-control:focus {
+  border-width: 2px;
+  padding: 25px 1rem;
+}
+
+.custom-control-pky .b-form-btn-label-control.form-control > label.form-control-lg {
+  min-height: calc(3.814rem - 2px) !important;
+}
+
+.main-menu.menu-light .navigation > li.active > a {
+  // border-radius: 14px;
+  box-shadow: none;
+}
+
+.vue-form-wizard .wizard-navigation .wizard-nav li .wizard-icon-circle .wizard-icon-container {
+  background-color: var(--primary) !important;
+}
+
+.vue-form-wizard .wizard-card-footer .wizard-footer-left .wizard-btn,
+.vue-form-wizard .wizard-card-footer .wizard-footer-right .wizard-btn {
+  background-color: var(--primary) !important;
+  border-color: var(--primary) !important;
+  color: white;
+}
+.wizard-btn {
+  border-radius: 40px!important;
+  background-color: var(--primary) !important;
+  border-color: var(--primary) !important;
+  color: white;
+}
+
+@media (min-width: 576px) {
+  #custom-modal .modal-dialog-scrollable {
+    max-height: calc(100% - 1.5rem);
+    margin: 0.75rem auto !important;
+  }
+  #custom-modal #custom-modal___BV_modal_content_ {
+    height: 95%;
+    background-color: #e3ded4;
+  }
+}
+
+@media all and (max-width: 576px) {
+  #custom-modal {
+    padding: 0 !important;
+    max-width: 100%;
+  }
+  #custom-modal #custom-modal___BV_modal_content_ {
+    height: 100%;
+    background-color: #e3ded4;
+  }
+  #custom-modal___BV_modal_body_ > div {
+    min-height: 110%;
+    display: flex;
+    justify-content: flex-start;
+    flex-flow: column;
+  }
+  #custom-modal .modal-dialog-scrollable {
+    max-height: 100% !important;
+    margin: 0 !important;
+  }
+}
+
+#custom-modal___BV_modal_header_ {
+  padding: 0 !important;
+}
+
+#custom-modal .modal-footer,
+#custom-modal .modal-header {
+  border-radius: 0 !important;
+  z-index: 999999;
+}
+
+#custom-modal___BV_modal_body_ {
+  padding: 0 0 0px 0 !important;
+}
+
+@media (min-width: 576px) {
+  #editPropertyModal .modal-dialog-scrollable {
+    max-height: calc(100% - 1.5rem);
+    margin: 0.75rem auto !important;
+  }
+  #editPropertyModal #editPropertyModal___BV_modal_content_ {
+    height: 95%;
+    background-color: #e3ded4;
+  }
+}
+
+@media all and (max-width: 576px) {
+  .vue-form-wizard {
+    padding: 20px 2px 0px 2px !important;
+  }
+  #editPropertyModal {
+    padding: 0 !important;
+    max-width: 100%;
+  }
+  #editPropertyModal #editPropertyModal___BV_modal_content_ {
+    height: 100%;
+  }
+  #editPropertyModal___BV_modal_body_ > div {
+    min-height: 110%;
+    display: flex;
+    justify-content: flex-start;
+    flex-flow: column;
+  }
+  #editPropertyModal .modal-dialog-scrollable {
+    max-height: 100% !important;
+    margin: 0 !important;
+  }
+}
+
+#editPropertyModal___BV_modal_header_ {
+  padding: 0 !important;
+}
+
+#editPropertyModal .modal-footer,
+#editPropertyModal .modal-header {
+  border-radius: 0 !important;
+  z-index: 999999;
+  background-color: #e3ded4;
+}
+
+#editPropertyModal___BV_modal_body_ {
+  padding: 0 0 50px 0 !important;
+}
+
+.btn-black {
+  background-color: #050505 !important;
+  border-color: #050505 !important;
+  color: white !important;
+  font-weight: bold;
+}
+
+.header-navbar.navbar-static-top {
+  width: 100% !important;
+  background: transparent !important;
+}
+
+.bluebody {
+  background-color: var(--secondary) !important;
+}
+
+label {
+  font-weight: bold;
+  font-family: Avenir, 'sans-serif';
+}
+
+
+.vff .f-text {
+  font-family: 'Avenir-SemiBold', Arial, sans-serif !important;
+}
+
+.vff .f-full-width input[type='date'],
+.vff .f-full-width input[type='email'],
+.vff .f-full-width input[type='number'],
+.vff .f-full-width input[type='password'],
+.vff .f-full-width input[type='tel'],
+.vff .f-full-width input[type='text'],
+.vff .f-full-width input[type='url'],
+.vff .f-full-width span.faux-form,
+.vff .f-full-width textarea {
+  font-family: 'Avenir-SemiBold', Arial, sans-serif !important;
+  font-weight: 300;
+}
+
+.vff .o-btn-action *,
+.vff .nav-button-text {
+  font-family: 'Avenir', Arial, sans-serif !important;
+  font-weight: 300;
+  color: white;
+  text-shadow: none;
+}
+
+.vue-slider-dot-handle {
+  background-color: var(--primary) !important;
+}
+.vue-slider-rail {
+  background-color: black !important;
+}
+.vue-slider-process {
+  background-color: var(--primary) !important;
+}
+
+.card-text {
+  font-weight: 400;
+  font-size: 14px;
+  color: #777;
+}
+
+.section-title {
+  font-weight: 700;
+  font-size: 28px;
+  color: #282828;
+}
+.box-property {
+  flex-grow: 1;
+  min-width: 23rem;
+  max-width: 26rem;
+  border: solid 1px var(--primary);
+  border-radius: 18px;
+}
+.box-property-address {
+  font-weight: 700;
+  font-size: 16px;
+  color: #333;
+}
+
+.dark-card {
+  color: #111;
+}
+
+@media (max-width: 576px) {
+  html body .app-content {
+    padding-top: calc(2rem) !important;
+  }
+}
+
+.auth-bg {
+  background-image: url('../images/bg.png');
+  background-position: top;
+  background-repeat: no-repeat;
+  background-size: cover;
+  backdrop-filter: blur(25.4486px);
+}
+
+.auth-card {
+  max-width: 550px;
+  border-radius: 23px;
+  border: 5.08971px solid #EFF0F7;
+  background: rgba(255, 255, 255, 0.3);
+}
+
+.auth-body {
+  min-width: 400px;
+}
+.auth-body input {
+  width: 400px;
+}
+
+.form-input {
+  border: 1px solid black;
+  height: 56px;
+}
+
+.form-btn {
+  font-size: 20px;
+  width: 100%;
+  border-radius: 5px;
+  height: 55px;
+}
+
+.f-regular {
+  font-family: Avenir-Regular, sans-serif;
+  font-weight: 400;
+}
+
+.f-medium {
+  font-family: Avenir-Medium, sans-serif;
+  font-weight: 500;
+}
+
+.f-semibold {
+  font-family: Avenir-SemiBold, sans-serif;
+  font-weight: 600;
+}
+
+.f-semibold {
+  font-family: Avenir-Bold, sans-serif;
+  font-weight: 700;
+}

@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <script src="https://cdn.withpersona.com/dist/persona-v4.0.0.js"></script>
+    <script>
+      function getParamValue(paramName)
+      {
+        const url = window.location.search.substring(1); //get rid of "?" in querystring
+        const qArray = url.split('&'); //get key-value pairs
+        for (let i = 0; i < qArray.length; i++)
+        {
+          const pArr = qArray[i].split('='); //split key and value
+          if (pArr[0] === paramName)
+            return pArr[1]; //return value
+        }
+      }
+    function sendMessage(data) {
+      console.log('sending', data, window.origin)
+      window.parent.postMessage(data, window.origin)
+    }
+
+    const client = new Persona.Client({
+        templateId: getParamValue('personaTempletID'),
+        environment: getParamValue('personaENV'),
+      onReady: () => client.open(),
+      onComplete ({ inquiryId, status, fields }) {
+        sendMessage({event: 'complete', data: { inquiryId, status, fields }})
+        console.log(`Completed inquiry ${inquiryId} with status ${status}`, fields);
+      },
+      onError({
+        status,
+        code,
+      }) {
+        sendMessage({event: 'error', data: {
+            status,
+            code,
+          }})
+        console.log('Persona Error', status, code)
+      },
+      onCancel:() => {
+        window.history.go(-1);
+        sendMessage({event: 'persona-cancel', data: null})
+        console.log('Persona Cancelled')
+      },
+      onLoad:() => {
+        sendMessage({event: 'persona-load', data: null})
+        console.log('Persona Ready')
+      }
+    });
+
+    client.open();
+  </script>
+  <style>
+    .ewmIsY {
+  background-color: #fff;
+}
+@media only screen and (min-width: 60.02px) and (min-height: 600.02px){
+  .iylGhi iframe {
+    /*max-width: 600px !important;*/
+    /*max-height: 650px;*/
+}
+}
+  </style>
+</head>
+<body>
+
+</body>
+</html>

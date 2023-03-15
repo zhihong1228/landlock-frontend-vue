@@ -1,0 +1,20 @@
+//  ================================================================================================
+//  ? TIP:  It is recommended to use this file for overriding bootstrap variables.
+//  ================================================================================================
+
+$primary: #0751C2 !default;
+$secondary: #FFF !default;
+//$secondary: #ECECEC !default;
+$danger: #e75263;
+
+:root {
+  --auth-bg-color: #f5eceb;
+  --primary: #0751C2;
+  //--secondary: #ECECEC;
+  --secondary: #FFF;
+  ::placeholder {
+    color: #5E696A;
+    font-weight: 400;
+    font-size: 15px;
+  } 
+}
