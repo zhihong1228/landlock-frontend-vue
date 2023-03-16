@@ -40,8 +40,8 @@
                   alt=""
               /></router-link> -->
               <h1
-                class="login-heading mb-3"
-                style="font-family: Avenir-Medium,serif; font-size: 32px"
+                class="login-heading mb-3 f-medium"
+                style="font-size: 32px"
               >
                 Sign in
               </h1>

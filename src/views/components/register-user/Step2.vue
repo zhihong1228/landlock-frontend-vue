@@ -10,21 +10,36 @@
       />
       <template v-else>
         <b-row class="d-flex justify-content-center">
-          <span
-            style="font-family:Avenir-Regular; font-size:15px;"
+          <h1
+            class="login-heading mb-3 f-medium"
+            style="font-size: 32px; text-align: center;"
           >
-            We sent a verification email to
-            <span
-              class="text-primary"
-              style="font-family:Avenir-SemiBold; font-size:15px;"
-            > {{ user.email }} </span>.
-            Click on the link inside to get started!
-          </span>
+            Email Confirmation
+          </h1>
         </b-row>
         <b-row class="d-flex justify-content-center">
-          <b-img
-            src="../../../assets/images/illustration/message.png"
-          />
+          <h1
+            class="login-heading mb-3 f-medium"
+            style="font-size: 24px; text-align: center; color: #3B3B3B;"
+          >
+            Please enter the one-time password (OTP) sent to your email address
+          </h1>
+        </b-row>
+        <b-row class="d-flex justify-content-center">
+          <validation-provider
+            #default="{ errors }"
+            name="OTP code"
+            rules="required"
+          >
+            <b-form-input
+              id="name"
+              v-model="code"
+              :state="errors.length > 0 ? false:null"
+              placeholder="OTP"
+              class="form-input"
+            />
+            <small class="text-danger">{{ errors[0] }}</small>
+          </validation-provider>
         </b-row>
         <b-row class="d-flex justify-content-center mt-3 mb-2">
           <span style="font-family:Avenir-Regular; font-size:15px;">
@@ -72,12 +87,13 @@
 </template>
 
 <script>
-import { ValidationObserver } from 'vee-validate'
+import { ValidationObserver, ValidationProvider } from 'vee-validate'
 import ToastificationContent from '@core/components/toastification/ToastificationContent.vue'
 import {
   BRow,
   BImg,
   BSpinner,
+  BFormInput
 } from 'bootstrap-vue'
 import Ripple from 'vue-ripple-directive'
 import { heightTransition } from '@core/mixins/ui/transition'
@@ -89,9 +105,11 @@ import { errMessage } from '../../../utils/errMessage'
 export default {
   components: {
     ValidationObserver,
+    ValidationProvider,
     BRow,
     BImg,
     BSpinner,
+    BFormInput
   },
   directives: {
     Ripple,
@@ -101,6 +119,7 @@ export default {
     return {
       resendingEmail: false,
       verifying: false,
+      code: ''
     }
   },
   computed: {

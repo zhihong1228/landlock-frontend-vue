@@ -86,6 +86,9 @@ body {
             border-color: $theme-dark-input-border-color;
             &::placeholder {
               color: $theme-dark-body-color;
+              color: #5E696A;
+              font-weight: 400;
+              font-size: 15px;
             }
           }
         }

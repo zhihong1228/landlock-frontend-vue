@@ -71,8 +71,11 @@ input[type=number]::-webkit-outer-spin-button {
   color: var(--primary);
 }
 .custom-size::placeholder {
-  color: rgba(64, 124, 81, 0.64);
-  font-weight: bold;
+  /* color: rgba(64, 124, 81, 0.64);
+  font-weight: bold; */
+  color: #5E696A;
+  font-weight: 400;
+  font-size: 15px;
 }
 .custom-dob .day, .custom-dob .year, .custom-dob .month {
   border-radius: 10px!important;

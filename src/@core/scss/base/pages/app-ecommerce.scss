@@ -166,6 +166,9 @@ $search-bar-height: 48px;
 
     &::placeholder {
       font-size: 0.95rem;
+      color: #5E696A;
+      font-weight: 400;
+      font-size: 15px;
     }
   }
 
@@ -448,7 +451,10 @@ $search-bar-height: 48px;
         font-weight: $font-weight-bolder;
         &::placeholder {
           color: $body-color;
-          font-weight: $font-weight-bolder;
+          // font-weight: $font-weight-bolder;
+          color: #5E696A;
+          font-weight: 400;
+          font-size: 15px;
         }
       }
       .input-group-append {

@@ -296,6 +296,9 @@ $vs-dropdown-box-shadow: 0px 4px 25px 0px rgba(0, 0, 0, 0.1);
       color: $theme-dark-body-color;
       &::placeholder {
         color: $theme-dark-input-placeholder-color;
+        color: #5E696A;
+        font-weight: 400;
+        font-size: 15px;
       }
     }
   }

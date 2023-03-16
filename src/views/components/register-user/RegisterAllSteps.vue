@@ -1,5 +1,5 @@
 <template>
-  <div class="custom-form-wizard">
+  <div class="custom-form-wizard auth-body">
     <div
       v-if="isLoading"
       style="height: 50vh"
@@ -24,11 +24,12 @@
       shape="square"
       finish-button-text="Submit"
       back-button-text="Previous"
-      class="mb-3"
+      class="mb-0 mt-0 pt-0"
+      style="background: transparent;"
       @on-complete="formSubmitted"
     >
       <!-- Basic Info -->
-      <template>
+      <!-- <template>
         <tab-content
           v-if="user && user.step1 === 'complete'"
           title="Basic Info"
@@ -62,7 +63,7 @@
           />
         </tab-content>
 
-        <!-- Email Verification -->
+        Email Verification
         <tab-content
           v-if="user && user.confirmedEmail"
           title="Email Verification"
@@ -94,7 +95,7 @@
           />
         </tab-content>
 
-        <!-- Phone Verification -->
+        Phone Verification
         <tab-content
           v-if="user && user.confirmedMobile"
           title="Phone Verification"
@@ -125,14 +126,33 @@
           />
         </tab-content>
 
-        <!-- KYC -->
+        KYC
         <tab-content title="KYC">
           <step4
             ref="phone-verification"
             @next="next"
           />
         </tab-content>
-      </template>
+      </template> -->
+
+      <step1
+        ref="step1Modal"
+        v-if="startIndex === 0"
+        @next="next"
+        @complete="step1Complete"
+      />
+      <step2
+        ref="step1Modal"
+        v-if="startIndex === 1"
+        @next="next"
+        @complete="step1Complete"
+      />
+      <step3
+        ref="step1Modal"
+        v-if="startIndex === 2"
+        @next="next"
+        @complete="step1Complete"
+      />
 
       <div slot="prev" />
       <div slot="next" />
@@ -325,9 +345,9 @@ export default {
   flex-direction: column;
   gap: 15px 0;
 }
-.custom-form-wizard .wizard-navigation .wizard-nav li {
-  margin-right: 0 !important;
-}
+// .custom-form-wizard .wizard-navigation .wizard-nav li {
+//   margin-right: 0 !important;
+// }
 .vue-form-wizard .wizard-navigation .wizard-nav li.active a {
   width: auto;
   box-shadow: none;
@@ -346,9 +366,9 @@ export default {
 /*.vue-form-wizard .wizard-navigation .wizard-nav li .wizard-icon-circle.checked {
   background-color: var(--primary);
 }*/
-.custom-form-wizard .stepTitle.active {
-  color: var(--primary) !important;
-}
+// .custom-form-wizard .stepTitle.active {
+//   color: var(--primary) !important;
+// }
 .vue-form-wizard .wizard-navigation .wizard-nav li .wizard-icon-circle.checked .wizard-icon {
   color: white;
 }
@@ -359,33 +379,33 @@ export default {
   font-family: 'Avenir-Regular';
 }
 
-.custom-form-wizard .wizard-nav.wizard-nav-pills {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  list-style: none;
-  margin: 0;
-  padding: 0;
-}
-.custom-form-wizard .wizard-navigation .wizard-nav li:not(:first-child) a::before {
-  content: none !important;
-}
+// .custom-form-wizard .wizard-nav.wizard-nav-pills {
+//   display: flex;
+//   justify-content: space-between;
+//   align-items: center;
+//   list-style: none;
+//   margin: 0;
+//   padding: 0;
+// }
+// .custom-form-wizard .wizard-navigation .wizard-nav li:not(:first-child) a::before {
+//   content: none !important;
+// }
 
-.custom-form-wizard .wizard-navigation .wizard-nav li a .stepTitle {
-  margin-right: 1rem;
-}
+// .custom-form-wizard .wizard-navigation .wizard-nav li a .stepTitle {
+//   margin-right: 1rem;
+// }
 
-@media screen and (max-width: 470px) {
-  .custom-form-wizard .wizard-navigation .wizard-nav li a {
-    flex-direction: row !important;
-  }
+// @media screen and (max-width: 470px) {
+//   .custom-form-wizard .wizard-navigation .wizard-nav li a {
+//     flex-direction: row !important;
+//   }
 
-  .custom-form-wizard .wizard-nav.wizard-nav-pills {
-    display: flex;
-    flex-direction: column !important;
-    justify-content: start;
-    align-items: start;
-    padding: 10px 20px 0px;
-  }
-}
+//   .custom-form-wizard .wizard-nav.wizard-nav-pills {
+//     display: flex;
+//     flex-direction: column !important;
+//     justify-content: start;
+//     align-items: start;
+//     padding: 10px 20px 0px;
+//   }
+// }
 </style>

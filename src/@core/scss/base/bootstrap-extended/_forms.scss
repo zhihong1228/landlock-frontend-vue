@@ -10,12 +10,19 @@ label {
 .form-control {
   &::placeholder {
     transition: all 0.2s ease;
+    color: #5E696A;
+    font-weight: 400;
+    font-size: 15px;
+    font-family: Avenir-Regular;
   }
 
   &:focus {
     &::placeholder {
       transform: translate(5px);
       transition: all 0.2s ease;
+      color: #5E696A;
+      font-weight: 400;
+      font-size: 15px;
     }
     &:valid,
     &.is-valid {

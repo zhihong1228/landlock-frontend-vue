@@ -1,7 +1,7 @@
 <template>
   <div
     id="app"
-    class="h-100"
+    class="h-100 auth-bg"
     :class="[skinClasses]"
   >
     <!--    <login-dialog />-->
@@ -118,7 +118,7 @@ export default {
   font-style: normal;
 }
 @font-face {
-  font-family: 'Avenir-SemiBold';
+  font-family: '';
   src: url('./assets/fonts/AvenirNextLTPro-SemiBold.otf') format('opentype');
   font-weight: 600;
   font-style: normal;

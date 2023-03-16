@@ -10,21 +10,14 @@
         <b-row
           align-h="center"
           align-v="center"
-          style="width: 100%; height: 100%"
+          style="height: calc(100vh - 130px);"
         >
           <b-col
-            cols="10"
-            md="10"
-            lg="8"
-            xl="6"
-            style=""
-            class="pl-0 pr-0 mt-0 mt-0 box-shadow-6"
+            cols="11"
+            class="auth-card"
+            style="padding: 30px;"
           >
-            <div class="">
-              <div class="">
-                <RegisterUser />
-              </div>
-            </div>
+            <RegisterUser />
           </b-col>
         </b-row>
       </b-row>
