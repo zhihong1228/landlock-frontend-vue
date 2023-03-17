@@ -8,6 +8,7 @@ export default {
     showLogin: false,
     users: [],
     properties: [],
+    verifyStep: 'start'
   },
   getters: {
     user: state => {
@@ -39,6 +40,10 @@ export default {
       state.properties = properties
     },
 
+    UPDATE_VERIFY_STEP: (state, step) => {
+      state.verifyStep = step
+    },
+
     toggleLogin(state) {
       state.showLogin = !state.showLogin
     },
@@ -64,6 +69,9 @@ export default {
   actions: {
     toggleLogin({ commit }) {
       commit('toggleLogin')
+    },
+    updateVerifyStep({ commit }, step) {
+      commit('UPDATE_VERIFY_STEP', step)
     },
     fetchAllUsers({ commit }) {
       return UsersService.getAllUsers().then(

@@ -477,6 +477,13 @@ label {
   margin: auto;
 }
 
+.verify-card {
+  max-width: 900px;
+  border-radius: 23px;
+  border: 5.08971px solid #EFF0F7;
+  background: rgba(255, 255, 255, 0.3);
+}
+
 .form-input {
   border: 1px solid black;
   height: 56px;
@@ -488,6 +495,23 @@ label {
   width: 100%;
   border-radius: 5px;
   height: 55px;
+}
+
+.common-btn {
+  width: 140px;
+  height: 43px;
+  border-radius: 5px;
+  font-size: 14px;
+}
+
+.common-input {
+  height: 37px;
+  border: 1px solid black;
+  border-radius: 5px;
+}
+.common-input-label {
+  font-size: 15px;
+  color: #000000;
 }
 
 .f-regular {
@@ -503,9 +527,10 @@ label {
 .f-semibold {
   font-family: Avenir-SemiBold, sans-serif;
   font-weight: 600;
+  color: #000000;
 }
 
-.f-semibold {
+.f-bold {
   font-family: Avenir-Bold, sans-serif;
   font-weight: 700;
 }

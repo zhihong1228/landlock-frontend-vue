@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div style="min-width: 400px;">
     <validation-observer
       ref="step2Rules"
       tag="form"
@@ -41,47 +41,32 @@
             <small class="text-danger">{{ errors[0] }}</small>
           </validation-provider>
         </b-row>
-        <b-row class="d-flex justify-content-center mt-3 mb-2">
-          <span style="font-family:Avenir-Regular; font-size:15px;">
-            Email not received? Check your spam folder or
-            <span
-              class="text-primary"
-              style="font-family:Avenir-SemiBold; font-size:15px; cursor:pointer"
-              @click="resendEmail"
-            >
-              Resend Email.
-            </span>
-            <b-spinner
-              v-if="resendingEmail"
-              style="width: 20px;height: 20px"
-            />
-            <feather-icon
-              v-else
-              icon="ChevronsRightIcon"
-              size="20"
-              style="opacity: 0"
-            />
-          </span>.
-        </b-row>
       </template>
     </validation-observer>
-    <div>
-      <button
-        class="wizard-btn my-2 float-right"
-        style="background-color: var(--primary) !important;
-    border-color: var(--primary) !important; color: white;"
-        @click="() => {$emit('next', 2)}"
+    <div class="d-flex flex-column">
+      <b-button
+        size="lg"
+        variant="primary"
+        class="mt-2 mb-1 float-right form-btn"
+        @click="() => handleEmit()"
       >
-        <span class="mr-1">Continue</span>
+        <span class="mr-1">Confirm</span>
         <b-spinner
           v-if="verifying"
           style="width: 17px; height: 17px"
         />
-        <feather-icon
-          v-else
-          icon="ArrowRightIcon"
+      </b-button>
+      <b-button
+        size="lg"
+        class=" mb-0 float-right form-btn"
+        @click="resendEmail"
+      >
+        <span class="mr-1 text-primary f-medium" style="font-size: 14px;">Resend code</span>
+        <b-spinner
+          v-if="verifying"
+          style="width: 17px; height: 17px"
         />
-      </button>
+      </b-button>
     </div>
   </div>
 </template>
@@ -93,7 +78,8 @@ import {
   BRow,
   BImg,
   BSpinner,
-  BFormInput
+  BFormInput,
+  BButton
 } from 'bootstrap-vue'
 import Ripple from 'vue-ripple-directive'
 import { heightTransition } from '@core/mixins/ui/transition'
@@ -109,7 +95,8 @@ export default {
     BRow,
     BImg,
     BSpinner,
-    BFormInput
+    BFormInput,
+    BButton
   },
   directives: {
     Ripple,
@@ -131,6 +118,11 @@ export default {
   },
 
   methods: {
+    handleEmit() {
+      // this.$emit('next', 2)
+      if(this.code)
+        this.isConfirmedEM()
+    },
     async complete() {
       console.log('yyyyyyyyyyyyyyyyy')
       return new Promise((resolve, reject) => {
@@ -156,7 +148,7 @@ export default {
       let isconf
       try {
         this.verifying = true
-        const { data: response } = await AuthService.isConfirmed({ userId: this.$store.state.user.user.id })
+        const { data: response } = await AuthService.isConfirmed({ userId: this.$store.state.user.user.id, otpCode: this.code })
           .catch(error => {
             this.messageEr = errMessage(error)
             // this.$toast({

@@ -11,7 +11,7 @@
         cols="11"
         class="auth-card"
       >
-        <div class="d-flex justify-content-center auth-body">
+        <div v-if="!checkMail" class="d-flex justify-content-center auth-body">
           <form
           class="login-form"
           >
@@ -110,8 +110,7 @@
                   <router-link
                     :to="{ name: 'register-page' }"
                     class="text-primary"
-                    style="
-                      font-family: Avenir, sans-serif;
+                    style="font-family: Avenir, sans-serif;
                       font-weight: 600;
                       margin-top: 2px;
                       font-size: 15px;
@@ -124,6 +123,50 @@
               </div>
             </div>
           </form>
+        </div>
+        <div v-if="checkMail" class="d-flex flex-column justify-content-center auth-body">
+          <h1
+            class="login-heading mb-1 f-medium"
+            style="font-size: 32px"
+          >
+            Check your inbox
+          </h1>
+          <h1
+            class="login-heading mb-3 f-medium"
+            style="font-size: 24px; text-align: center; color: #3B3B3B;"
+          >
+            The instructions for resetting your password have been sent to {{ email }}
+          </h1>
+          <p class="mt-0 d-flex flex-row align-items-center justify-content-center text-center">
+            <small
+              class="text-dark me-2 text-center"
+              style="font-family: Avenir-Medium, sans-serif; font-weight: 500; font-size: 16px;"
+            >
+              Didn't get the email?
+            </small>
+            <button
+              class="text-primary f-medium"
+              style="margin-top: 2px;font-size: 15px;color: var(--primary) !important; border: none; background-color: transparent;"
+              @click="resetPsswd"
+            >
+              Send another email
+            </button>
+          </p>
+          <p class="mb-3 mt-0 d-flex flex-row align-items-center justify-content-center text-center">
+            <small
+              class="text-dark text-center"
+              style="font-family: Avenir-Medium, sans-serif; font-weight: 500; font-size: 16px;"
+            >
+              Typo in your email?
+            </small>
+            <button
+              class="text-primary f-medium"
+              style="margin-top: 2px;font-size: 15px;color: var(--primary) !important; border: none; background-color: transparent;"
+              @click="handleTypo"
+            >
+              Fix it
+            </button>
+          </p>
         </div>
 
       </b-col>
@@ -206,6 +249,7 @@ export default {
       messageEr: '',
       email: '',
       channel: 'email',
+      checkMail: false
     }
   },
   beforeCreate() {
@@ -221,10 +265,13 @@ export default {
     }
   },
   methods: {
+    handleTypo() {
+      this.checkMail = false
+    },
     resetPsswd() {
       // return this.showRecoverModal = true
       this.isLoading = true
-
+      this.checkMail = true
       AuthService.resetPassword({ email: this.email, channel: this.channel })
         .then(response => {
           this.isLoading = false
@@ -232,7 +279,8 @@ export default {
             this.message = response.data.display
             this.messageEr = null
             if (this.channel === 'sms') {
-              this.showRecoverModal = true
+              // this.showRecoverModal = true
+              this.checkMail = true
             }
           } else {
             this.messageEr = response.data.display

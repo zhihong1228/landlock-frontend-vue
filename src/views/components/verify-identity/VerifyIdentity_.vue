@@ -1,387 +1,82 @@
 <template>
   <div
-    style="padding: 0 20px 20px; overflow:hidden; height: calc(100vh - 170px); width: 100%;"
-    class="d-flex flex-column "
+    style="padding: 0 20px 20px; overflow:hidden; height: calc(100vh - 170px);"
+    class="d-flex flex-column"
   >
-    <div class="d-flex flex-column justify-content-center verify-card" style="margin: auto; width: 100%;">
-      <div class="d-flex flex-column justify-content-center my-5" style="margin: auto; width: 80%;">
-        <div v-if="verifyShowStep === 1" class="d-flex flex-column justify-content-center">
-          <h1
-            class="mb-3 mt-3 login-heading f-semibold"
-            style="font-size: 60px; text-align: left;"
-          >
-            Great,<br> Let's keep going
-          </h1>
-          <h1
-            class="login-heading f-medium mb-5"
-            style="font-size: 22px; text-align: left;"
-          >
-            Before we can register your property, we need to learn more about you
-          </h1>
-          <b-button
-            variant="primary"
-            class="common-btn"
-            @click="handleStart"
-          >
-            Continue
-          </b-button>
-          <span class="mt-1 mb-3 f-semibold" style="font-size: 18px;">
-            Your progress will be automatically saved
+    <!--    <ul class="nav navbar-nav flex-row d-flex flex-nowrap justify-content-between &lt;!&ndash; d-xl-none&ndash;&gt;">
+      &lt;!&ndash;      <li class="nav-item">
+        <b-link
+          class="nav-link"
+          @click="toggleVerticalMenuActive"
+        >
+          <feather-icon
+            icon="MenuIcon"
+            size="21"
+          />
+        </b-link>
+      </li>&ndash;&gt;
+
+      <li class="nav-item ">
+        <b-link
+          class="navbar-brand"
+          to="/"
+        >
+          <span class="brand-logo">
+            <b-img
+              :src="appLogoImage"
+              style="max-width: 250px!important;"
+              alt="logo"
+            />
           </span>
-        </div>
-        <!-- <div v-if="verifyShowStep==2" class="d-flex flex-column justify-content-center"> -->
-        <div v-if="verifyShowStep === 2" class="d-flex flex-column justify-content-center">
-          <h1
-            class="mb-3 mt-3 login-heading f-semibold"
-            style="font-size: 35px; text-align: left;"
-          >
-            General information
-          </h1>
-          <b-row
-            class="d-flex flex-row"
-          >
-            <b-col col="6">
-              <div class="mb-1">
-                <label
-                  class="form-label common-input-label"
-                  for="floatingInput"
-                >Logal first name</label>
-                <input
-                  id="floatingInput"
-                  v-model="data.firstName"
-                  class="form-control common-input"
-                  placeholder="John"
-                  type="email"
-                  style="font-size: 1rem;"
-                >
-              </div>
-              <div class="mb-1">
-                <label
-                  class="form-label common-input-label"
-                  for="floatingInput"
-                >Logal last name</label>
-                <input
-                  id="floatingInput"
-                  v-model="data.lastName"
-                  class="form-control common-input"
-                  placeholder="Smith"
-                  type="email"
-                  style="font-size: 1rem;"
-                >
-              </div>
-              <div class="mb-1">
-                <label
-                  class="form-label common-input-label"
-                  for="floatingInput"
-                >Residential address</label>
-                <input
-                  id="floatingInput"
-                  v-model="data.fullAddress"
-                  class="form-control common-input"
-                  placeholder="Street number and name"
-                  type="email"
-                  style="font-size: 1rem;"
-                >
-              </div>
-              <div class="mb-1">
-                <input
-                  id="floatingInput"
-                  v-model="data.city"
-                  class="form-control common-input"
-                  placeholder="City"
-                  type="email"
-                  style="font-size: 1rem;"
-                >
-              </div>
-              <div class="mb-1">
-                <label
-                  class="form-label common-input-label"
-                  for="floatingInput"
-                >Social security number</label>
-                <input
-                  id="floatingInput"
-                  v-model="data.ssn"
-                  class="form-control common-input"
-                  placeholder="00-0000000"
-                  type="email"
-                  style="font-size: 1rem;"
-                >
-              </div>
-            </b-col>
-            <b-col col="6">
-              <div class="mb-1">
-                <label
-                  class="form-label common-input-label"
-                  for="floatingInput"
-                >Logal middle name</label>
-                <input
-                  id="floatingInput"
-                  v-model="middleName"
-                  class="form-control common-input"
-                  placeholder="Optional"
-                  type="email"
-                  style="font-size: 1rem;"
-                >
-              </div>
-              <div class="mb-1">
-                <label
-                  class="form-label common-input-label"
-                  for="floatingInput"
-                ><span>Date of birth:</span></label>
-                <b-row>
-                  <b-col col="12" class="d-flex flex-row justify-content-between">
-                    <input
-                      id="floatingInput"
-                      v-model="subAddress"
-                      class="form-control common-input"
-                      placeholder="MM"
-                      type="email"
-                      style="font-size: 1rem; width: 25%; text-align: center;"
-                    >
-                  
-                    <input
-                      id="floatingInput"
-                      v-model="subAddress"
-                      class="form-control common-input"
-                      placeholder="DD"
-                      type="email"
-                      style="font-size: 1rem; text-align: center; width: 25%;"
-                    >
-                  
-                    <input
-                      id="floatingInput"
-                      v-model="subAddress"
-                      class="form-control common-input"
-                      placeholder="YYYY"
-                      type="email"
-                      style="font-size: 1rem; width: 40%; text-align: center;"
-                    >
-                  </b-col>
-                </b-row>
-              </div>
-              <div class="mb-1">
-                <label
-                  class="form-label common-input-label"
-                  for="floatingInput"
-                ><span style="color: transparent;">SubAddress</span></label>
-                <input
-                  id="floatingInput"
-                  v-model="subAddress"
-                  class="form-control common-input"
-                  placeholder="Apt, suite, floor (optional)"
-                  type="email"
-                  style="font-size: 1rem;"
-                >
-              </div>
-              <div class="mb-1">
-                <b-row>
-                  <b-col col="6">
-                    <input
-                      id="floatingInput"
-                      v-model="data.state"
-                      class="form-control common-input"
-                      placeholder="State"
-                      type="email"
-                      style="font-size: 1rem;"
-                    >
-                  </b-col>
-                  <b-col col="6">
-                    <input
-                      id="floatingInput"
-                      v-model="data.zip"
-                      class="form-control common-input"
-                      placeholder="Zip code"
-                      type="email"
-                      style="font-size: 1rem;"
-                    >
-                  </b-col>
-                </b-row>
-              </div>
-            </b-col>
-          </b-row>
-          <b-row class="mt-2">
-            <b-col col="12" class="d-flex flex-row justify-content-between">
-              <b-button
-                variant="primary"
-                class="common-btn"
-                @click="handleBack"
-              >
-                Back
-              </b-button>
-              <b-button
-                variant="primary"
-                class="common-btn"
-                @click="handleContinue"
-              >
-                Continue
-              </b-button>
-            </b-col>
-          </b-row>
-        </div>
-        <div v-if="verifyShowStep === 3" class="d-flex flex-column justify-content-center">
-          <h1
-            class="mb-3 mt-3 login-heading f-semibold"
-            style="font-size: 35px; text-align: left;"
-          >
-            Security questions
-          </h1>
-          <b-row
-            class="d-flex flex-row"
-          >
-            <b-col col="6">
-              <div class="mb-1">
-                <label
-                  class="form-label common-input-label"
-                  for="floatingInput"
-                >Choose a security question:</label>
-                <input
-                  id="floatingInput"
-                  v-model="data.firstName"
-                  class="form-control common-input"
-                  placeholder="Select a Security Question"
-                  type="email"
-                  style="font-size: 1rem;"
-                >
-                <!-- <b-form-select v-model="selected" :options=""></b-form-select> -->
-              </div>
-              <div class="mb-1">
-                <label
-                  class="form-label common-input-label"
-                  for="floatingInput"
-                >Choose a security question:</label>
-                <input
-                  id="floatingInput"
-                  v-model="data.firstName"
-                  class="form-control common-input"
-                  placeholder="Select a Security Question"
-                  type="email"
-                  style="font-size: 1rem;"
-                >
-              </div>
-              <div class="mb-1">
-                <label
-                  class="form-label common-input-label"
-                  for="floatingInput"
-                >Choose a security question:</label>
-                <input
-                  id="floatingInput"
-                  v-model="data.firstName"
-                  class="form-control common-input"
-                  placeholder="Select a Security Question"
-                  type="email"
-                  style="font-size: 1rem;"
-                >
-              </div>
-              <div class="mb-1">
-                <label
-                  class="form-label common-input-label"
-                  for="floatingInput"
-                >Choose a security question:</label>
-                <input
-                  id="floatingInput"
-                  v-model="data.firstName"
-                  class="form-control common-input"
-                  placeholder="Select a Security Question"
-                  type="email"
-                  style="font-size: 1rem;"
-                >
-              </div>
-            </b-col>
-            <b-col col="6">
-              <div class="mb-1">
-                <label
-                  class="form-label common-input-label"
-                  for="floatingInput"
-                >Answer</label>
-                <input
-                  id="floatingInput"
-                  v-model="middleName"
-                  class="form-control common-input"
-                  placeholder="Answer"
-                  type="email"
-                  style="font-size: 1rem;"
-                >
-              </div>
-              <div class="mb-1">
-                <label
-                  class="form-label common-input-label"
-                  for="floatingInput"
-                >Answer</label>
-                <input
-                  id="floatingInput"
-                  v-model="middleName"
-                  class="form-control common-input"
-                  placeholder="Answer"
-                  type="email"
-                  style="font-size: 1rem;"
-                >
-              </div>
-              <div class="mb-1">
-                <label
-                  class="form-label common-input-label"
-                  for="floatingInput"
-                >Answer</label>
-                <input
-                  id="floatingInput"
-                  v-model="middleName"
-                  class="form-control common-input"
-                  placeholder="Answer"
-                  type="email"
-                  style="font-size: 1rem;"
-                >
-              </div>
-              <div class="mb-1">
-                <label
-                  class="form-label common-input-label"
-                  for="floatingInput"
-                >Answer</label>
-                <input
-                  id="floatingInput"
-                  v-model="middleName"
-                  class="form-control common-input"
-                  placeholder="Answer"
-                  type="email"
-                  style="font-size: 1rem;"
-                >
-              </div>
-            </b-col>
-          </b-row>
-          <b-row class="mt-2">
-            <b-col col="12" class="d-flex flex-row justify-content-between">
-              <b-button
-                variant="primary"
-                class="common-btn"
-                @click="handleBack"
-              >
-                Back
-              </b-button>
-              <b-button
-                variant="primary"
-                class="common-btn"
-                @click="handleContinue"
-              >
-                Continue
-              </b-button>
-            </b-col>
-          </b-row>
-        </div>
-      </div>
-    </div>
+          <h2 class="brand-text">
+            {{ appName }}
+          </h2>
+        </b-link>
+      </li>
+
+      <li class="nav-item ">
+        <b-button
+          link-class="d-flex align-items-center"
+          title="Logout"
+          @click="logout"
+        >
+          <feather-icon
+            v-b-tooltip.hover.bottom="'Log Out'"
+            size="32"
+            icon="LogOutIcon"
+            class="mr-50"
+            style="color: black"
+          />
+          &lt;!&ndash;          <span style="color: black">Logout</span>&ndash;&gt;
+        </b-button>
+      </li>
+    </ul>-->
+    <flow-form
+      ref="flowForm"
+      :language="language"
+      :questions="questions"
+      :on-answer="onAnswer"
+      class="flex-grow-1"
+      @submit="onSubmit"
+    >
+      <template v-slot:error>
+        {{ errorMsg }}
+      </template>
+    </flow-form>
   </div>
+  <!--  </b-modal>-->
 </template>
 
 <script>
 // import FlowForm, {
 //   ChoiceOption, LanguageModel, QuestionModel, QuestionType,
 // } from '@ditdot-dev/vue-flow-form'
-import {
-  BButton, BRow, BCol
-} from 'bootstrap-vue'
+
 import ToastificationContent from '@core/components/toastification/ToastificationContent.vue'
 import { $themeConfig } from '@themeConfig'
 import { VBTooltip } from 'bootstrap-vue'
 import AuthService from '@/services/AuthService'
-import { mapMutations, mapActions, mapState } from 'vuex'
+import { mapMutations, mapState } from 'vuex'
 import FlowForm from '../../../../vue-flow-form/src/components/FlowForm.vue'
 import QuestionModel, { ChoiceOption, QuestionType } from '../../../../vue-flow-form/src/models/QuestionModel'
 import LanguageModel from '../../../../vue-flow-form/src/models/LanguageModel'
@@ -391,10 +86,6 @@ export default {
   name: 'VerifyIdentity',
   components: {
     FlowForm,
-    BButton,
-    BRow,
-    BCol,
-    BFormSelect
   },
   directives: {
     'b-tooltip': VBTooltip,
@@ -734,8 +425,6 @@ export default {
         dob: '',
         SSN: null,
       },
-      middleName: '',
-      subAddress: '',
       data: {
         firstName: '',
         lastName: '',
@@ -768,17 +457,7 @@ export default {
   computed: {
     ...mapState({
       user: state => state.user.user,
-      verifyStep: state => state.user.verifyStep,
-
     }),
-    verifyShowStep() {
-      let startIndex = 0
-      if(this.verifyStep === 'start') startIndex = 1
-      else if (this.verifyStep === 'general') startIndex = 2
-      else if (this.verifyStep === 'security') startIndex = 3
-      console.log("verifyStep: ", this.verifyStep, startIndex)
-      return startIndex
-    },
     appName() {
       return $themeConfig.app.appName
     },
@@ -817,24 +496,6 @@ export default {
       logoutUser: 'user/LOGOUT_USER',
       updateUser: 'user/UPDATE_USER',
     }),
-    ...mapActions({
-      updateVerifyStep: 'user/updateVerifyStep'
-    }),
-    handleStart() {
-      this.updateVerifyStep('general')
-    },
-    handleBack() {
-      if (this.verifyShowStep === 2)
-        this.updateVerifyStep('start')
-      else if (this.verifyShowStep === 3)
-        this.updateVerifyStep('general')
-    },
-    handleContinue() {
-      if (this.verifyShowStep === 2)
-        this.updateVerifyStep('security')
-      else if (this.verifyShowStep === 3)
-        this.updateVerifyStep('almost')
-    },
     logout() {
       AuthService.logout()
         .then(() => {

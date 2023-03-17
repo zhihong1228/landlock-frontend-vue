@@ -1,12 +1,18 @@
 <template>
   <div>
-    <div>
+    <!-- <div>
       <div
         v-if="!showOTP"
         class="d-flex flex-column justify-content-center align-items-center"
       >
+        <h1
+          class="login-heading f-medium"
+          style="font-size: 32px; text-align: center;"
+        >
+          Phone verification
+        </h1>
         <h4 class="text-center mt-3 mb-0">
-          Please type your cell number
+          Please enter the one-time password (OTP) send to {{ mobile }}
         </h4>
         <b-input-group
           class="mt-3"
@@ -33,24 +39,24 @@
           />
         </b-input-group>
       </div>
-    </div>
+    </div> -->
     <b-col
-      v-if="mobile && showOTP"
-      class="px-xl-2 mx-auto"
+      class="mx-auto"
+      style="padding: 0"
     >
-      <h5
-        class="mb-0 mt-1 d-flex justify-content-center"
-        style="font-family:Avenir-Regular,sans-serif;"
+      <h1
+        class="login-heading f-medium"
+        style="font-size: 32px; text-align: center;"
       >
-        Please enter the one time password sent to
-        <span style="font-family:Avenir-SemiBold,sans-serif;margin-left: 5px;">
-          {{ mobile }}.
-        </span>
-      </h5>
+        Phone verification
+      </h1>
+      <h1 class="text-center mt-3 mb-3 f-regular" style="font-size: 24px">
+        Please enter the one-time password (OTP) send to {{ mobile }}
+      </h1>
       <div class=" d-flex justify-content-center">
         <div
           class="otp"
-          style="max-width: 500px; margin-bottom: 90px;"
+          style="max-width: 500px;"
         >
           <validation-observer ref="verifyOTPForm">
             <validation-provider
@@ -58,7 +64,21 @@
               name="OTP"
               rules="required|min:6"
             >
-              <b-input-group
+              <!-- <validation-provider
+                #default="{ errors }"
+                name="OTP code"
+                rules="required"
+              > -->
+                <b-form-input
+                  id="name"
+                  v-model="otp"
+                  :state="errors.length > 0 ? false:null"
+                  placeholder="OTP"
+                  class="form-input"
+                />
+                <small class="text-danger">{{ errors[0] }}</small>
+              <!-- </validation-provider> -->
+              <!-- <b-input-group
                 class="mt-3"
                 style=""
               >
@@ -85,23 +105,36 @@
                   :state="errors.length > 0 ? false : null"
                   name="otp"
                 />
-              </b-input-group>
-              <small class="text-danger">{{ errors[0] }}</small>
+              </b-input-group> -->
             </validation-provider>
           </validation-observer>
+          <div class="d-flex flex-column">
+            <b-button
+              size="lg"
+              variant="primary"
+              class="mt-2 mb-1 float-right form-btn"
+              @click="() => handleEmit()"
+            >
+              <span class="mr-1">Confirm</span>
+              <b-spinner
+                v-if="verifying"
+                style="width: 17px; height: 17px"
+              />
+            </b-button>
+            <b-button
+              size="lg"
+              class=" mb-0 float-right form-btn"
+              @click="sendSMS"
+            >
+              <span class="mr-1 text-primary f-medium" style="font-size: 14px;">Resend code</span>
+              <b-spinner
+                v-if="verifying"
+                style="width: 17px; height: 17px"
+              />
+            </b-button>
+          </div>
         </div>
       </div>
-      <span
-        class="d-flex justify-content-center mb-2"
-        style="font-family:Avenir-Regular,sans-serif; font-size:15px;"
-      >
-        OTP not received? <span
-          class="text-primary"
-          style="font-family:Avenir-SemiBold,sans-serif; font-size:15px; cursor:pointer; margin-left: 5px;"
-          @click="showOTP = false; addCountryCode(); mobile = mobileInput.getNumber();"
-        >  Resend.
-        </span>
-      </span>
       <b-spinner
         v-if="resendingMobile"
         class="text-primary"
@@ -169,6 +202,12 @@ export default {
     ...mapMutations({
       updateUser: 'user/UPDATE_USER',
     }),
+    handleEmit() {
+      // this.$emit('next', 3)
+      console.log("this.opt: ", this.otp)
+      if(this.otp)
+        this.complete()
+    },
     addCountryCode() {
       const that = this
       setTimeout(() => {
@@ -188,10 +227,11 @@ export default {
         this.$refs.verifyOTPForm.validate().then(success => {
           console.log(success)
           if (success) {
-            console.log(this.mobileInput.getSelectedCountryData())
+            // console.log(this.mobileInput.getSelectedCountryData())
             const data = {
               otp: this.otp,
-              mobile: this.mobileInput.getNumber(),
+              // mobile: this.mobileInput.getNumber(),
+              mobile: this.mobile,
               channel: 'sms',
               locale: 'en',
               userId: this.user.id,
@@ -215,6 +255,7 @@ export default {
                   mobile: this.mobileInput.getNumber(),
                   confirmedMobile: true,
                 })
+                this.$router.push('/identity-verification')
                 resolve(true)
                 // this.$router.push('/identity-verification')
               })
@@ -244,8 +285,9 @@ export default {
     async sendSMS() {
       try {
         this.resendingMobile = true
-        console.log(this.mobileInput.getSelectedCountryData())
-        const resp = await AuthService.sendOTP(this.mobileInput.getNumber())
+        // console.log(this.mobileInput.getSelectedCountryData())
+        // const resp = await AuthService.sendOTP(this.mobileInput.getNumber())
+        const resp = await AuthService.sendOTP(this.mobile)
         this.resendingMobile = false
         console.log(resp)
         if (resp.data.data !== true) {

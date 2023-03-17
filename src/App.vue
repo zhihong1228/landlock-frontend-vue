@@ -118,7 +118,7 @@ export default {
   font-style: normal;
 }
 @font-face {
-  font-family: '';
+  font-family: 'Avenir-SemiBold';
   src: url('./assets/fonts/AvenirNextLTPro-SemiBold.otf') format('opentype');
   font-weight: 600;
   font-style: normal;
