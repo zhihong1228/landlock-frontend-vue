@@ -173,7 +173,7 @@ export default {
       // this.updateUser(userData)
       AuthService.getUser()
         .then(response => {
-          console.log(response.data.userData?.user?.firstName)
+          console.log("login created: ", response.data.userData?.user?.firstName)
           this.updateUser(response.data.userData.user)
           this.$toast({
             component: ToastificationContent,
@@ -274,13 +274,15 @@ export default {
       return isconf
     },
     async verify() {
+      console.log("login: verify log:")
       // console.log('comfirming', this.isConfirmed, this.isConfirmedEM())
       /* const confirmed = await this.isConfirmedEM()
       // console.log('confirmed', confirmed)
       if (!confirmed.confirmedEmail) {
         this.showVerifyEmailModal = true
       } else if (!confirmed.confirmedMobile) this.toggleLogin()
-      else */await this.$router.push('/')
+      else */
+       this.$router.push('/')
     },
   },
 }

@@ -102,7 +102,7 @@
         <!--          <span style="color: black">Logout</span>-->
       </div>
       <b-nav-item-dropdown
-        v-if="false && user.id"
+        v-if="user.id"
         right
         toggle-class="d-flex align-items-center dropdown-user-link"
         class="dropdown-user"
@@ -283,6 +283,8 @@ export default {
         })
     },
     logout() {
+      console.log("route meta: ", this.$route.meta)
+      return
       this.loggingOut = true
       AuthService.logout()
         .then(() => {

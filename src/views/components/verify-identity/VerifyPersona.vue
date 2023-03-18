@@ -1,9 +1,38 @@
 <template>
   <div
-    class=""
-    style=" position: fixed; bottom: 0; left: 0; right: 0;"
+    class="d-flex align-items-center"
+    style="height: 100%;  bottom: 0; left: 0; right: 0;"
   >
+    <div v-if="page === 'start'" class="d-flex flex-column justify-content-center verify-card" style="margin: auto; width: 100%;">
+      <div class="d-flex flex-column justify-content-center my-5" style="margin: auto; width: 80%;">
+        <div  class="d-flex flex-column justify-content-center">
+          <h1
+            class="mb-3 mt-3 login-heading f-semibold"
+            style="font-size: 60px; text-align: left;"
+          >
+            Great,<br> Your identify verification is almost complete
+          </h1>
+          <h1
+            class="login-heading f-medium mb-5"
+            style="font-size: 22px; text-align: left;"
+          >
+            The last step is verifying your government-issued ID
+          </h1>
+          <b-button
+            variant="primary"
+            class="common-btn"
+            @click="handleStart"
+          >
+            Start
+          </b-button>
+          <span class="mt-1 mb-3 f-semibold" style="font-size: 18px;">
+            Please have your government-issued ID on hand
+          </span>
+        </div>
+      </div>
+    </div>
     <iframe
+      v-if="page==='verify'"
       id="the-iframe"
       allow="camera"
       class="h-100 w-100"
@@ -29,7 +58,9 @@
 </template>
 
 <script>
-
+import {
+  BButton,
+} from 'bootstrap-vue'
 import ToastificationContent from '@core/components/toastification/ToastificationContent.vue'
 import { mapMutations, mapState } from 'vuex'
 import UsersService from '../../../services/UsersService'
@@ -38,10 +69,12 @@ import { filterMatches } from '../../../utils/index'
 export default {
   name: 'VerifyPersona',
   components: {
+    BButton
   },
   data() {
     return {
       window,
+      page: 'start'
     }
   },
   computed: {
@@ -113,6 +146,9 @@ export default {
     ...mapMutations({
       updateUser: 'user/UPDATE_USER',
     }),
+    handleStart() {
+      this.page = 'verify'
+    },
     /* updatePersona(dataIn) {
       const data = {
         SSN: this.user.ssn,

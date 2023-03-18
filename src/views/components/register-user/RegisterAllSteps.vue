@@ -291,6 +291,14 @@ export default {
       this.isLoading = false
     }
   },
+  watch: {
+    startIndex(value) {
+      if(value === 3) {
+        this.$router.push('/identity-verification')
+        this.step2Complete()
+      }
+    }
+  },
   methods: {
     ...mapMutations({
       updateUser: 'user/UPDATE_USER',

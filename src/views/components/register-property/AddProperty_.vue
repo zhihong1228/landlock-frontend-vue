@@ -1,38 +1,14 @@
 <template>
-  <!-- <property-flow-form :adding-property="true" /> -->
-  <div>
-    <b-row>
-      <b-col cols="5">
-          <Sidebar :step="step" />
-      </b-col>
-      <b-col cols="7">
-
-      </b-col>
-    </b-row>
-  </div>
+  <property-flow-form :adding-property="true" />
 </template>
 
 <script>
-import {
-    BRow,
-    BCol,
-    BButton,
-    BImg,
-    BSpinner,
-} from 'bootstrap-vue'
 import PropertyFlowForm from '@/views/components/register-property/PropertyFlowForm.vue'
 import { mapState } from 'vuex'
-import Sidebar from './Sidebar.vue'
 
 export default {
   components: {
-    BRow,
-    BCol,
-    BButton,
-    BImg,
-    BSpinner,
     PropertyFlowForm,
-    Sidebar
   },
   directives: {
   },
@@ -40,7 +16,6 @@ export default {
     return {
       errors: [],
       email: null,
-      step: 1
     }
   },
   beforeCreate() {

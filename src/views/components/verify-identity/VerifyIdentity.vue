@@ -37,170 +37,243 @@
           >
             General information
           </h1>
-          <b-row
-            class="d-flex flex-row"
+          <validation-observer
+            ref="general"
+            tag="form"
+            class="d-flex flex-column justify-content-center"
           >
-            <b-col col="6">
-              <div class="mb-1">
-                <label
-                  class="form-label common-input-label"
-                  for="floatingInput"
-                >Logal first name</label>
-                <input
-                  id="floatingInput"
-                  v-model="data.firstName"
-                  class="form-control common-input"
-                  placeholder="John"
-                  type="email"
-                  style="font-size: 1rem;"
-                >
-              </div>
-              <div class="mb-1">
-                <label
-                  class="form-label common-input-label"
-                  for="floatingInput"
-                >Logal last name</label>
-                <input
-                  id="floatingInput"
-                  v-model="data.lastName"
-                  class="form-control common-input"
-                  placeholder="Smith"
-                  type="email"
-                  style="font-size: 1rem;"
-                >
-              </div>
-              <div class="mb-1">
-                <label
-                  class="form-label common-input-label"
-                  for="floatingInput"
-                >Residential address</label>
-                <input
-                  id="floatingInput"
-                  v-model="data.fullAddress"
-                  class="form-control common-input"
-                  placeholder="Street number and name"
-                  type="email"
-                  style="font-size: 1rem;"
-                >
-              </div>
-              <div class="mb-1">
-                <input
-                  id="floatingInput"
-                  v-model="data.city"
-                  class="form-control common-input"
-                  placeholder="City"
-                  type="email"
-                  style="font-size: 1rem;"
-                >
-              </div>
-              <div class="mb-1">
-                <label
-                  class="form-label common-input-label"
-                  for="floatingInput"
-                >Social security number</label>
-                <input
-                  id="floatingInput"
-                  v-model="data.ssn"
-                  class="form-control common-input"
-                  placeholder="00-0000000"
-                  type="email"
-                  style="font-size: 1rem;"
-                >
-              </div>
-            </b-col>
-            <b-col col="6">
-              <div class="mb-1">
-                <label
-                  class="form-label common-input-label"
-                  for="floatingInput"
-                >Logal middle name</label>
-                <input
-                  id="floatingInput"
-                  v-model="middleName"
-                  class="form-control common-input"
-                  placeholder="Optional"
-                  type="email"
-                  style="font-size: 1rem;"
-                >
-              </div>
-              <div class="mb-1">
-                <label
-                  class="form-label common-input-label"
-                  for="floatingInput"
-                ><span>Date of birth:</span></label>
-                <b-row>
-                  <b-col col="12" class="d-flex flex-row justify-content-between">
-                    <input
-                      id="floatingInput"
-                      v-model="subAddress"
-                      class="form-control common-input"
-                      placeholder="MM"
-                      type="email"
-                      style="font-size: 1rem; width: 25%; text-align: center;"
-                    >
-                  
-                    <input
-                      id="floatingInput"
-                      v-model="subAddress"
-                      class="form-control common-input"
-                      placeholder="DD"
-                      type="email"
-                      style="font-size: 1rem; text-align: center; width: 25%;"
-                    >
-                  
-                    <input
-                      id="floatingInput"
-                      v-model="subAddress"
-                      class="form-control common-input"
-                      placeholder="YYYY"
-                      type="email"
-                      style="font-size: 1rem; width: 40%; text-align: center;"
-                    >
-                  </b-col>
-                </b-row>
-              </div>
-              <div class="mb-1">
-                <label
-                  class="form-label common-input-label"
-                  for="floatingInput"
-                ><span style="color: transparent;">SubAddress</span></label>
-                <input
-                  id="floatingInput"
-                  v-model="subAddress"
-                  class="form-control common-input"
-                  placeholder="Apt, suite, floor (optional)"
-                  type="email"
-                  style="font-size: 1rem;"
-                >
-              </div>
-              <div class="mb-1">
-                <b-row>
-                  <b-col col="6">
-                    <input
-                      id="floatingInput"
-                      v-model="data.state"
-                      class="form-control common-input"
-                      placeholder="State"
-                      type="email"
-                      style="font-size: 1rem;"
-                    >
-                  </b-col>
-                  <b-col col="6">
-                    <input
-                      id="floatingInput"
-                      v-model="data.zip"
-                      class="form-control common-input"
-                      placeholder="Zip code"
-                      type="email"
-                      style="font-size: 1rem;"
-                    >
-                  </b-col>
-                </b-row>
-              </div>
-            </b-col>
-          </b-row>
+            <b-row
+              class="d-flex flex-row"
+            >
+              <b-col cols="6">
+                <div class="mb-1">
+                  <label
+                    class="form-label common-input-label"
+                    for="floatingInput"
+                  >Logal first name</label>
+                  <validation-provider
+                    #default="{ errors }"
+                    name="First Name"
+                    rules="required"
+                  >
+                    <b-form-input
+                      id="name"
+                      v-model="data.firstName"
+                      :state="errors.length > 0 ? false:null"
+                      placeholder="John"
+                      class="common-input"
+                      style="width: 100%;"
+                    />
+                  </validation-provider>
+                </div>
+                <div class="mb-1">
+                  <label
+                    class="form-label common-input-label"
+                    for="floatingInput"
+                  >Logal last name</label>
+                  <validation-provider
+                    #default="{ errors }"
+                    name="Last Name"
+                    rules="required"
+                  >
+                    <b-form-input
+                      id="lastName"
+                      v-model="data.lastName"
+                      :state="errors.length > 0 ? false:null"
+                      placeholder="Smith"
+                      class="common-input"
+                      style="width: 100%;"
+                    />
+                  </validation-provider>
+                </div>
+                <div class="mb-1">
+                  <label
+                    class="form-label common-input-label"
+                    for="floatingInput"
+                  >Residential address</label>
+                  <validation-provider
+                    #default="{ errors }"
+                    name="Full Address"
+                    rules="required"
+                  >
+                    <b-form-input
+                      id="lastName"
+                      v-model="data.fullAddress"
+                      :state="errors.length > 0 ? false:null"
+                      placeholder="Street number and name"
+                      class="common-input"
+                      style="width: 100%;"
+                    />
+                  </validation-provider>
+                </div>
+                <div class="mb-1">
+                  <validation-provider
+                    #default="{ errors }"
+                    name="City"
+                    rules="required"
+                  >
+                    <b-form-input
+                      id="lastName"
+                      v-model="data.city"
+                      :state="errors.length > 0 ? false:null"
+                      placeholder="City"
+                      class="common-input"
+                      style="width: 100%;"
+                    />
+                  </validation-provider>
+                </div>
+                <div class="mb-1">
+                  <label
+                    class="form-label common-input-label"
+                    for="floatingInput"
+                  >Social security number</label>
+                  <validation-provider
+                    #default="{ errors }"
+                    name="Social Security Number"
+                    rules="required"
+                  >
+                    <b-form-input
+                      id="lastName"
+                      v-model="data.ssn"
+                      :state="errors.length > 0 ? false:null"
+                      placeholder="00-0000000"
+                      class="common-input"
+                      style="width: 100%;"
+                    />
+                  </validation-provider>
+                </div>
+              </b-col>
+              <b-col cols="6">
+                <div class="mb-1">
+                  <label
+                    class="form-label common-input-label"
+                    for="floatingInput"
+                  >Logal middle name</label>
+                  <input
+                    id="floatingInput"
+                    v-model="middleName"
+                    class="form-control common-input"
+                    placeholder="Optional"
+                    type="email"
+                    style="font-size: 1rem;"
+                  >
+                </div>
+                <div class="mb-1">
+                  <label
+                    class="form-label common-input-label"
+                    for="floatingInput"
+                  ><span>Date of birth:</span></label>
+                  <b-row>
+                    <b-col cols="12" class="d-flex flex-row justify-content-between">
+                      <div style="width: 25%;">
+                        <validation-provider
+                          #default="{ errors }"
+                          name="Month"
+                          rules="required"
+                        >
+                          <b-form-input
+                            id="lastName"
+                            type="number"
+                            v-model="dobMonth"
+                            :state="errors.length > 0 ? false:null"
+                            placeholder="MM"
+                            class="common-input"
+                            style="text-align: center;"
+                          />
+                        </validation-provider>
+                      </div>
+                      <div style="width: 25%;">
+                        <validation-provider
+                          #default="{ errors }"
+                          name="Day"
+                          rules="required"
+                        >
+                          <b-form-input
+                            id="lastName"
+                            type="number"
+                            v-model="dobDay"
+                            :state="errors.length > 0 ? false:null"
+                            placeholder="DD"
+                            class="common-input"
+                            style="text-align: center;"
+                          />
+                        </validation-provider>
+                      </div>
+                      <div style="width: 40%;">
+                        <validation-provider
+                          #default="{ errors }"
+                          name="Day"
+                          rules="required"
+                        >
+                          <b-form-input
+                            id="lastName"
+                            type="number"
+                            v-model="dobYear"
+                            :state="errors.length > 0 ? false:null"
+                            placeholder="YYYY"
+                            class="common-input"
+                            style="text-align: center;"
+                          />
+                        </validation-provider>
+                      </div>
+                    </b-col>
+                  </b-row>
+                </div>
+                <div class="mb-1">
+                  <label
+                    class="form-label common-input-label"
+                    for="floatingInput"
+                  ><span style="color: transparent;">Department Number</span></label>
+                  <input
+                    id="floatingInput"
+                    v-model="data.departmentNumber"
+                    class="form-control common-input"
+                    placeholder="Apt, suite, floor (optional)"
+                    type="email"
+                    style="font-size: 1rem;"
+                  >
+                </div>
+                <div class="mb-1">
+                  <b-row>
+                    <b-col cols="6">
+                      <validation-provider
+                        #default="{ errors }"
+                        name="State"
+                        rules="required"
+                      >
+                        <b-form-input
+                          id="lastName"
+                          v-model="data.state"
+                          :state="errors.length > 0 ? false:null"
+                          placeholder="State"
+                          class="common-input"
+                          style="width: 100%;"
+                        />
+                      </validation-provider>
+                    </b-col>
+                    <b-col cols="6">
+                      <validation-provider
+                        #default="{ errors }"
+                        name="Zip code"
+                        rules="required"
+                      >
+                        <b-form-input
+                          id="lastName"
+                          v-model="data.zip"
+                          :state="errors.length > 0 ? false:null"
+                          placeholder="Zip code"
+                          class="common-input"
+                          style="width: 100%;"
+                        />
+                      </validation-provider>
+                    </b-col>
+                  </b-row>
+                </div>
+              </b-col>
+            </b-row>
+          </validation-observer> 
           <b-row class="mt-2">
-            <b-col col="12" class="d-flex flex-row justify-content-between">
+            <b-col cols="12" class="d-flex flex-row justify-content-between">
               <b-button
                 variant="primary"
                 class="common-btn"
@@ -220,150 +293,213 @@
         </div>
         <div v-if="verifyShowStep === 3" class="d-flex flex-column justify-content-center">
           <h1
-            class="mb-3 mt-3 login-heading f-semibold"
+            class="mb-3 mt-1 login-heading f-semibold"
             style="font-size: 35px; text-align: left;"
           >
             Security questions
           </h1>
-          <b-row
-            class="d-flex flex-row"
+          <validation-observer
+            ref="sq"
+            tag="form"
+            class="d-flex flex-column justify-content-center"
           >
-            <b-col col="6">
-              <div class="mb-1">
-                <label
-                  class="form-label common-input-label"
-                  for="floatingInput"
-                >Choose a security question:</label>
-                <input
-                  id="floatingInput"
-                  v-model="data.firstName"
-                  class="form-control common-input"
-                  placeholder="Select a Security Question"
-                  type="email"
-                  style="font-size: 1rem;"
+            <b-row
+              class="d-flex flex-row"
+            >
+              <b-col cols="6">
+                <div class="mb-1">
+                  <label
+                    class="form-label common-input-label"
+                    for="floatingInput"
+                  >Choose a security question:</label>
+                  <!-- <validation-provider
+                    #default="{ errors }"
+                    name="Question1"
+                    rules="required"
+                  > -->
+                    <b-form-select v-model="data.question1" :options="sqOptons" class="common-input" placeholder="Select a Security Question">
+                    </b-form-select>
+                  <!-- </validation-provider> -->
+                </div>
+                <div class="mb-1">
+                  <label
+                    class="form-label common-input-label"
+                    for="floatingInput"
+                  >Choose a security question:</label>
+                  <!-- <validation-provider
+                    #default="{ errors }"
+                    name="Question2"
+                    rules="required"
+                  > -->
+                    <b-form-select v-model="data.question2" :options="sqOptons" class="common-input">
+                    </b-form-select>
+                  <!-- </validation-provider> -->
+                </div>
+                <div class="mb-1">
+                  <label
+                    class="form-label common-input-label"
+                    for="floatingInput"
+                  >Choose a security question:</label>
+                  <!-- <validation-provider
+                    #default="{ errors }"
+                    name="Question3"
+                    rules="required"
+                  > -->
+                    <b-form-select v-model="data.question3" :options="sqOptons" class="common-input">
+                    </b-form-select>
+                  <!-- </validation-provider> -->
+                </div>
+                <div class="mb-1">
+                  <label
+                    class="form-label common-input-label"
+                    for="floatingInput"
+                  >Choose a security question:</label>
+                  <!-- <validation-provider
+                    #default="{ errors }"
+                    name="Question4"
+                    rules="required"
+                  > -->
+                    <b-form-select v-model="data.question4" :options="sqOptons" class="common-input">
+                    </b-form-select>
+                  <!-- </validation-provider> -->
+                </div>
+                <div class="mb-1">
+                  <label
+                    class="form-label common-input-label"
+                    for="floatingInput"
+                  >Choose a security question:</label>
+                  <!-- <validation-provider
+                    #default="{ errors }"
+                    name="Question5"
+                    rules="required"
+                  > -->
+                    <b-form-select v-model="data.question5" :options="sqOptons" class="common-input">
+                    </b-form-select>
+                  <!-- </validation-provider> -->
+                </div>
+              </b-col>
+              <b-col cols="6">
+                <div class="mb-1">
+                  <label
+                    class="form-label common-input-label"
+                    for="floatingInput"
+                  >Answer</label>
+                  <validation-provider
+                    #default="{ errors }"
+                    name="Answer1"
+                    rules="required"
+                  >
+                    <b-form-input
+                      id="name"
+                      v-model="data.answer1"
+                      :state="errors.length > 0 ? false:null"
+                      placeholder="Answer"
+                      class="common-input"
+                      style="width: 100%;"
+                    />
+                  </validation-provider>
+                </div>
+                <div class="mb-1">
+                  <label
+                    class="form-label common-input-label"
+                    for="floatingInput"
+                  >Answer</label>
+                  <validation-provider
+                    #default="{ errors }"
+                    name="Answer2"
+                    rules="required"
+                  >
+                    <b-form-input
+                      id="name"
+                      v-model="data.answer2"
+                      :state="errors.length > 0 ? false:null"
+                      placeholder="Answer"
+                      class="common-input"
+                      style="width: 100%;"
+                    />
+                  </validation-provider>
+                </div>
+                <div class="mb-1">
+                  <label
+                    class="form-label common-input-label"
+                    for="floatingInput"
+                  >Answer</label>
+                  <validation-provider
+                    #default="{ errors }"
+                    name="Answer3"
+                    rules="required"
+                  >
+                    <b-form-input
+                      id="name"
+                      v-model="data.answer3"
+                      :state="errors.length > 0 ? false:null"
+                      placeholder="Answer"
+                      class="common-input"
+                      style="width: 100%;"
+                    />
+                  </validation-provider>
+                </div>
+                <div class="mb-1">
+                  <label
+                    class="form-label common-input-label"
+                    for="floatingInput"
+                  >Answer</label>
+                  <validation-provider
+                    #default="{ errors }"
+                    name="Answer4"
+                    rules="required"
+                  >
+                    <b-form-input
+                      id="name"
+                      v-model="data.answer4"
+                      :state="errors.length > 0 ? false:null"
+                      placeholder="Answer"
+                      class="common-input"
+                      style="width: 100%;"
+                    />
+                  </validation-provider>
+                </div>
+                <div class="mb-1">
+                  <label
+                    class="form-label common-input-label"
+                    for="floatingInput"
+                  >Answer</label>
+                  <validation-provider
+                    #default="{ errors }"
+                    name="Answer5"
+                    rules="required"
+                  >
+                    <b-form-input
+                      id="name"
+                      v-model="data.answer5"
+                      :state="errors.length > 0 ? false:null"
+                      placeholder="Answer"
+                      class="common-input"
+                      style="width: 100%;"
+                    />
+                  </validation-provider>
+                </div>
+              </b-col>
+            </b-row>
+            <b-row class="mt-2">
+              <b-col cols="12" class="d-flex flex-row justify-content-between">
+                <b-button
+                  variant="primary"
+                  class="common-btn"
+                  @click="handleBack"
                 >
-                <!-- <b-form-select v-model="selected" :options=""></b-form-select> -->
-              </div>
-              <div class="mb-1">
-                <label
-                  class="form-label common-input-label"
-                  for="floatingInput"
-                >Choose a security question:</label>
-                <input
-                  id="floatingInput"
-                  v-model="data.firstName"
-                  class="form-control common-input"
-                  placeholder="Select a Security Question"
-                  type="email"
-                  style="font-size: 1rem;"
+                  Back
+                </b-button>
+                <b-button
+                  variant="primary"
+                  class="common-btn"
+                  @click="handleContinue"
                 >
-              </div>
-              <div class="mb-1">
-                <label
-                  class="form-label common-input-label"
-                  for="floatingInput"
-                >Choose a security question:</label>
-                <input
-                  id="floatingInput"
-                  v-model="data.firstName"
-                  class="form-control common-input"
-                  placeholder="Select a Security Question"
-                  type="email"
-                  style="font-size: 1rem;"
-                >
-              </div>
-              <div class="mb-1">
-                <label
-                  class="form-label common-input-label"
-                  for="floatingInput"
-                >Choose a security question:</label>
-                <input
-                  id="floatingInput"
-                  v-model="data.firstName"
-                  class="form-control common-input"
-                  placeholder="Select a Security Question"
-                  type="email"
-                  style="font-size: 1rem;"
-                >
-              </div>
-            </b-col>
-            <b-col col="6">
-              <div class="mb-1">
-                <label
-                  class="form-label common-input-label"
-                  for="floatingInput"
-                >Answer</label>
-                <input
-                  id="floatingInput"
-                  v-model="middleName"
-                  class="form-control common-input"
-                  placeholder="Answer"
-                  type="email"
-                  style="font-size: 1rem;"
-                >
-              </div>
-              <div class="mb-1">
-                <label
-                  class="form-label common-input-label"
-                  for="floatingInput"
-                >Answer</label>
-                <input
-                  id="floatingInput"
-                  v-model="middleName"
-                  class="form-control common-input"
-                  placeholder="Answer"
-                  type="email"
-                  style="font-size: 1rem;"
-                >
-              </div>
-              <div class="mb-1">
-                <label
-                  class="form-label common-input-label"
-                  for="floatingInput"
-                >Answer</label>
-                <input
-                  id="floatingInput"
-                  v-model="middleName"
-                  class="form-control common-input"
-                  placeholder="Answer"
-                  type="email"
-                  style="font-size: 1rem;"
-                >
-              </div>
-              <div class="mb-1">
-                <label
-                  class="form-label common-input-label"
-                  for="floatingInput"
-                >Answer</label>
-                <input
-                  id="floatingInput"
-                  v-model="middleName"
-                  class="form-control common-input"
-                  placeholder="Answer"
-                  type="email"
-                  style="font-size: 1rem;"
-                >
-              </div>
-            </b-col>
-          </b-row>
-          <b-row class="mt-2">
-            <b-col col="12" class="d-flex flex-row justify-content-between">
-              <b-button
-                variant="primary"
-                class="common-btn"
-                @click="handleBack"
-              >
-                Back
-              </b-button>
-              <b-button
-                variant="primary"
-                class="common-btn"
-                @click="handleContinue"
-              >
-                Continue
-              </b-button>
-            </b-col>
-          </b-row>
+                  Continue
+                </b-button>
+              </b-col>
+            </b-row>
+          </validation-observer>
         </div>
       </div>
     </div>
@@ -374,14 +510,16 @@
 // import FlowForm, {
 //   ChoiceOption, LanguageModel, QuestionModel, QuestionType,
 // } from '@ditdot-dev/vue-flow-form'
+import { ValidationObserver, ValidationProvider } from 'vee-validate'
 import {
-  BButton, BRow, BCol
+  BButton, BRow, BCol, BFormSelect, BFormInput, BFormGroup
 } from 'bootstrap-vue'
 import ToastificationContent from '@core/components/toastification/ToastificationContent.vue'
 import { $themeConfig } from '@themeConfig'
 import { VBTooltip } from 'bootstrap-vue'
 import AuthService from '@/services/AuthService'
 import { mapMutations, mapActions, mapState } from 'vuex'
+import { password, required, confirmed } from '@validations'
 import FlowForm from '../../../../vue-flow-form/src/components/FlowForm.vue'
 import QuestionModel, { ChoiceOption, QuestionType } from '../../../../vue-flow-form/src/models/QuestionModel'
 import LanguageModel from '../../../../vue-flow-form/src/models/LanguageModel'
@@ -390,17 +528,22 @@ import LanguageModel from '../../../../vue-flow-form/src/models/LanguageModel'
 export default {
   name: 'VerifyIdentity',
   components: {
+    ValidationProvider,
+    ValidationObserver,
     FlowForm,
     BButton,
     BRow,
     BCol,
-    BFormSelect
+    BFormSelect,
+    BFormGroup,
+    BFormInput
   },
   directives: {
     'b-tooltip': VBTooltip,
   },
   data() {
     return {
+      required,
       showModal: true,
       errorMsg: '',
       language: new LanguageModel({
@@ -412,6 +555,37 @@ export default {
         // Your language definitions here (optional).
         // You can leave out this prop if you want to use the default definitions.
       }),
+      sqOptons: [
+        { valule: null, text: 'Select Question' },
+        { value: 'In what city were you born?', text: 'In what city were you born?' },
+        { value: 'What was your favorite food as a child?', text: 'What was your favorite food as a child?' },
+        { value: 'What is the name of your favorite pet?', text: 'What is the name of your favorite pet?' },
+        { value: 'What high school did you attend?', text: 'What high school did you attend?' },
+        { value: 'What is the name of your first school?', text: 'What is the name of your first school?' },
+        { value: 'Where did you meet your spouse?', text: 'Where did you meet your spouse?' },
+        { value: 'What was your childhood nickname?', text: 'What was your childhood nickname?' },
+        { value: 'In what city did you meet your spouse/significant other?', text: 'In what city did you meet your spouse/significant other?' },
+        { value: 'What is the name of your favorite childhood friend?', text: 'What is the name of your favorite childhood friend?' },
+        { value: 'What street did you live on in third grade?', text: 'What street did you live on in third grade?' },
+        { value: 'What is your oldest sibling’s birthday month and year? (e.g., January 1900)', text: 'What is your oldest sibling’s birthday month and year? (e.g., January 1900)' },
+        { value: 'What is the middle name of your youngest child?', text: 'What is the middle name of your youngest child?' },
+        { value: 'What is your oldest sibling\'s middle name?', text: 'What is your oldest sibling\'s middle name?' },
+        { value: 'What school did you attend for sixth grade?', text: 'What school did you attend for sixth grade?' },
+        { value: 'What was your childhood phone number including area code? (e.g., 000-000-0000)', text: 'What was your childhood phone number including area code? (e.g., 000-000-0000)' },
+        { value: 'What is your oldest cousin\'s first and last name?', text: 'What is your oldest cousin\'s first and last name?' },
+        { value: 'What was the name of your first stuffed animal?', text: 'What was the name of your first stuffed animal?' },
+        { value: 'In what city or town did your mother and father meet?', text: 'In what city or town did your mother and father meet?' },
+        { value: 'Where were you when you had your first kiss?', text: 'Where were you when you had your first kiss?' },
+        { value: 'What is the first name of the boy or girl that you first kissed?', text: 'What is the first name of the boy or girl that you first kissed?' },
+        { value: 'What was the last name of your third grade teacher?', text: 'What was the last name of your third grade teacher?' },
+        { value: 'In what city does your nearest sibling live?', text: 'In what city does your nearest sibling live?' },
+        { value: 'What is your youngest brother’s birthday month and year? (e.g., January 1900)', text: 'What is your youngest brother’s birthday month and year? (e.g., January 1900)' },
+        { value: 'What is your maternal grandmother\'s maiden name?', text: 'What is your maternal grandmother\'s maiden name?' },
+        { value: 'In what city or town was your first job?', text: 'In what city or town was your first job?' },
+        { value: 'What is the name of the place your wedding reception was held?', text: 'What is the name of the place your wedding reception was held?' },
+        { value: 'What is the name of a college you applied to but didn\'t attend?', text: 'What is the name of a college you applied to but didn\'t attend?' },
+        { value: 'Where were you when you first heard about 9/11?', text: 'Where were you when you first heard about 9/11?' },
+      ],
       sqList: [
         'Select Question',
         'In what city were you born?',
@@ -736,6 +910,9 @@ export default {
       },
       middleName: '',
       subAddress: '',
+      dobMonth: '',
+      dobDay: '',
+      dobYear: '',
       data: {
         firstName: '',
         lastName: '',
@@ -747,12 +924,12 @@ export default {
         state: '',
         fullAddress: '',
         departmentNumber: '',
-        question1: '',
-        question2: '',
-        question3: '',
-        question4: '',
-        question5: '',
-        question6: '',
+        question1: null,
+        question2: null,
+        question3: null,
+        question4: null,
+        question5: null,
+        question6: null,
         answer1: '',
         answer2: '',
         answer3: '',
@@ -776,6 +953,7 @@ export default {
       if(this.verifyStep === 'start') startIndex = 1
       else if (this.verifyStep === 'general') startIndex = 2
       else if (this.verifyStep === 'security') startIndex = 3
+      else if (this.verifyStep === 'almost') startIndex = 4
       console.log("verifyStep: ", this.verifyStep, startIndex)
       return startIndex
     },
@@ -823,17 +1001,43 @@ export default {
     handleStart() {
       this.updateVerifyStep('general')
     },
+    handleAlmostStart() {
+
+    },
     handleBack() {
       if (this.verifyShowStep === 2)
         this.updateVerifyStep('start')
       else if (this.verifyShowStep === 3)
         this.updateVerifyStep('general')
     },
-    handleContinue() {
-      if (this.verifyShowStep === 2)
-        this.updateVerifyStep('security')
-      else if (this.verifyShowStep === 3)
-        this.updateVerifyStep('almost')
+    async handleContinue() {
+      if (this.verifyShowStep === 2) {
+        return new Promise((resolve, reject) => {
+          this.$refs.general.validate().then(success => {
+            if(success) {
+              console.log("general information success: ")
+              this.updateVerifyStep('security')
+              resolve(true)
+            } else {
+              reject()
+            }
+          })
+        })
+      } else if (this.verifyShowStep === 3) {
+        return new Promise((resolve, reject) => {
+          this.$refs.sq.validate().then(success => {
+            console.log("$req.sq.Validate(): ", success)
+            if(success) {
+              console.log("general information success: ")
+              // this.updateVerifyStep('almost')
+              this.onSubmit()
+              resolve(true)
+            } else {
+              reject()
+            }
+          })
+        })
+      }
     },
     logout() {
       AuthService.logout()
@@ -887,49 +1091,52 @@ export default {
         this.verifying = false
       }
     },
-    onSubmit(questionsList) {
-      console.log('onSubmit', this.data)
-      Object.keys(questionsList)
-        .forEach(k => {
-          this.data.step1 = 'complete'
-          // console.log('-----id---->', questionsList[k].id)
-          // console.log(questionsList[k].title, '------', questionsList[k].answer[0])
-          // console.log('-----title---->', questionsList[k])
 
-          // eslint-disable-next-line default-case
-          switch (questionsList[k].id) {
-            case 'security_questions_1':
-              // eslint-disable-next-line prefer-destructuring
-              this.data.question2 = questionsList[k].answer[0]
-              // eslint-disable-next-line prefer-destructuring
-              this.data.answer2 = questionsList[k].answer[1]
-              break
-            case 'security_questions_2':
-              // eslint-disable-next-line prefer-destructuring
-              this.data.question3 = questionsList[k].answer[0]
-              // eslint-disable-next-line prefer-destructuring
-              this.data.answer3 = questionsList[k].answer[1]
-              break
-            case 'security_questions_3':
-              // eslint-disable-next-line prefer-destructuring
-              this.data.question4 = questionsList[k].answer[0]
-              // eslint-disable-next-line prefer-destructuring
-              this.data.answer4 = questionsList[k].answer[1]
-              break
-            case 'security_questions_4':
-              // eslint-disable-next-line prefer-destructuring
-              this.data.question5 = questionsList[k].answer[0]
-              // eslint-disable-next-line prefer-destructuring
-              this.data.answer5 = questionsList[k].answer[1]
-              break
-            case 'security_questions_5':
-              // eslint-disable-next-line prefer-destructuring
-              this.data.question6 = questionsList[k].answer[0]
-              // eslint-disable-next-line prefer-destructuring
-              this.data.answer6 = questionsList[k].answer[1]
-              break
-          }
-        })
+    // onSubmit(questionsList) {
+    onSubmit() {
+      console.log('onSubmit', this.data)
+      // Object.keys(questionsList)
+      //   .forEach(k => {
+      //     this.data.step1 = 'complete'
+      //     // console.log('-----id---->', questionsList[k].id)
+      //     // console.log(questionsList[k].title, '------', questionsList[k].answer[0])
+      //     // console.log('-----title---->', questionsList[k])
+
+      //     // eslint-disable-next-line default-case
+      //     switch (questionsList[k].id) {
+      //       case 'security_questions_1':
+      //         // eslint-disable-next-line prefer-destructuring
+      //         this.data.question2 = questionsList[k].answer[0]
+      //         // eslint-disable-next-line prefer-destructuring
+      //         this.data.answer2 = questionsList[k].answer[1]
+      //         break
+      //       case 'security_questions_2':
+      //         // eslint-disable-next-line prefer-destructuring
+      //         this.data.question3 = questionsList[k].answer[0]
+      //         // eslint-disable-next-line prefer-destructuring
+      //         this.data.answer3 = questionsList[k].answer[1]
+      //         break
+      //       case 'security_questions_3':
+      //         // eslint-disable-next-line prefer-destructuring
+      //         this.data.question4 = questionsList[k].answer[0]
+      //         // eslint-disable-next-line prefer-destructuring
+      //         this.data.answer4 = questionsList[k].answer[1]
+      //         break
+      //       case 'security_questions_4':
+      //         // eslint-disable-next-line prefer-destructuring
+      //         this.data.question5 = questionsList[k].answer[0]
+      //         // eslint-disable-next-line prefer-destructuring
+      //         this.data.answer5 = questionsList[k].answer[1]
+      //         break
+      //       case 'security_questions_5':
+      //         // eslint-disable-next-line prefer-destructuring
+      //         this.data.question6 = questionsList[k].answer[0]
+      //         // eslint-disable-next-line prefer-destructuring
+      //         this.data.answer6 = questionsList[k].answer[1]
+      //         break
+      //     }
+      //   })
+      this.data.dob = `${this.dobDay}-${this.dobYear}-${this.dobMonth}`
       this.data.step1 = 'complete'
       this.data.step2 = 'complete'
       this.data.step3 = 'incomplete'

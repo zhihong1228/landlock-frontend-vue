@@ -252,7 +252,7 @@ export default {
                 this.verifying = false
                 this.updateUser({
                   ...this.user,
-                  mobile: this.mobileInput.getNumber(),
+                  mobile: this.mobile,
                   confirmedMobile: true,
                 })
                 this.$router.push('/identity-verification')
