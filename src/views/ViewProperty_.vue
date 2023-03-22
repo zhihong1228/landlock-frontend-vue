@@ -16,7 +16,7 @@
 
     <div v-else>
       <div class="card p-2">
-        <!-- <div
+        <div
           class="mb-4 d-flex flex-wrap justify-content-center justify-content-md-between align-items-center"
         >
           <div class="section-title text-center mb-1 mb-md-0">
@@ -66,7 +66,7 @@
               />
             </b-button>
           </div>
-        </div> -->
+        </div>
 
         <div class="mb-1">
           <b-row>
@@ -75,26 +75,88 @@
               lg="4"
             >
               <div class=" px-0">
-                <div class="mb-1 d-flex flex-column">
-                  <span class="f-semibold" style="font-size: 18px;">Address:</span>
-                  <span class="f-medium  color-dark" style="font-size: 15px;">{{ property.fullAddress }}</span>
+                <div style="font-weight: 700; font-size: 24px;color: black">
+                  {{
+                    (property.departmentNumber ? property.departmentNumber + ', ' : '') +
+                      (property.fullAddress
+                        ? (property.fullAddress.split(',') || ['N/A'])[0]
+                        : '')
+                  }}
                 </div>
-                <div class="mb-1 d-flex flex-column">
-                  <span class="f-semibold" style="font-size: 18px;">Type:</span>
-                  <span class="f-medium  color-dark" style="font-size: 15px;">{{ property.category }}</span>
-                </div>
-                <div class="mb-1 d-flex flex-column">
-                  <span class="f-semibold" style="font-size: 18px;">Owner registered:</span>
-                  <span class="f-medium  color-dark" style="font-size: 15px;">{{ property.owners[0].name }}</span>
-                </div>
-                <b-button
-                  variant="primary"
-                  class="common-btn"
-                  style="width: 50%; border-radius: 5px; margin-top: 30px;"
-                  @click="generateCertificate"
+                <div
+                  class="mb-2"
+                  style="font-weight: 600; font-size: 16px; color: black"
                 >
-                  <span class="color-light">Generate certificate</span>
-                </b-button>
+                  {{
+                    property.fullAddress
+                      ? (property.fullAddress.split(',') || []).slice(1).join(', ')
+                      : 'N/A'
+                  }}
+                </div>
+
+                <div class="mb-2">
+                  <div class="row">
+                    <div class="col text-left">
+                      <span class="key">Lot No: </span>
+                    </div>
+                    <div class="col text-right">
+                      <span class="value"> {{ property.numberLot || 'N/A' }}</span>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col text-left">
+                      <span class="key">Block No: </span>
+                    </div>
+                    <div class="col text-right">
+                      <span class="value"> {{ property.numberBlock || 'N/A' }}</span>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col text-left">
+                      <span class="key">Parcel ID: </span>
+                    </div>
+                    <div class="col text-right">
+                      <span class="value"> {{ property.numberParcel || 'N/A' }}</span>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col text-left">
+                      <span class="key">Estimated Value: </span>
+                    </div>
+                    <div class="col text-right">
+                      <span class="value">
+                        {{ property.price ? '$' + property.price : 'N/A' }}</span>
+                    </div>
+                  </div>
+
+                  <div class="row">
+                    <div class="col text-left">
+                      <span class="key">Property Type: </span>
+                    </div>
+                    <div class="col text-right">
+                      <span class="value"> {{ property.category || 'N/A' }}</span>
+                    </div>
+                  </div>
+
+                  <div class="row">
+                    <div class="col text-left">
+                      <span class="key">Owner: </span>
+                    </div>
+                    <div class="col text-right">
+                      <span class="value">
+                        {{ ((property.owners || [])[0] || {}).name || 'N/A' }}</span>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col text-left">
+                      <span class="key">Registrant Name: </span>
+                    </div>
+                    <div class="col text-right">
+                      <span class="value">
+                        {{ ((property.owners || [])[0] || {}).name || 'N/A' }}</span>
+                    </div>
+                  </div>
+                </div>
               </div>
             </b-col>
             <b-col
@@ -119,24 +181,6 @@
             </b-col>
           </b-row>
         </div>
-      </div>
-      <div class="card p-2" style="background-color: #E0EDF1;">
-        <b-row>
-          <b-col cols="12" class="d-flex flex-column">
-            <div class="d-flex flex-row align-items-center mb-1">
-              <img src="../assets/images/icons/bulb.png" style="width: 19px; height: 19px; margin-top: -4px; margin-right: 5px;" />
-              <span class="f-semibold" style="font-size: 19px;">Instructions:</span>
-            </div>
-            <div>
-              <span class="f-regular color-dark" style="font-size: 15px;">
-                Congratulations on taking the important step of protecting your property! Now that you have generated a warning statement, it's time to make sure it's recorded in your property's deed. This will ensure that the warning is officially recognized and that it will be recognized by any future owners of the property. How to record the warning statement?
-              </span>
-            </div>
-            <div>
-              <a href="#" class="f-medium color-dark" style="font-size: 15px; text-decoration: underline;">How to record a warning statement</a>
-            </div>
-          </b-col>
-        </b-row>
       </div>
 
       <div
@@ -219,21 +263,27 @@
       </div>
 
       <div class="card p-2 mb-3">
-        <div class="mb-0 d-flex flex-wrap justify-content-center justify-content-md-between align-items-center">
+        <div class="mb-4 d-flex flex-wrap justify-content-center justify-content-md-between align-items-center">
           <div
             class="section-title mb-1 mb-md-0"
-            style="font-size: 24px;"
-            @click="handleShowWarn"
           >
-            Warning statement
-            <!-- <b-button v-b-toggle.collapse-warning class="m-1"> -->
-            <!-- <b-button variant="primary" v-b-toggle.collapse-warning class="m-1">
-              Warning statement
-            </b-button> -->
+            Warning
           </div>
           <div class="d-flex flex-wrap align-items-center justify-content-center">
-            
-            <!-- <b-button
+            <b-button
+              variant="primary"
+              size="lg"
+              class="ml-1 my-1"
+              style="font-size: 15px"
+            >
+              Share
+              <feather-icon
+                icon="ShareIcon"
+                size="18"
+                style="margin-left: 5px"
+              />
+            </b-button>
+            <b-button
               variant="primary"
               size="lg"
               class="ml-1 my-1"
@@ -246,95 +296,79 @@
                 size="18"
                 style="margin-left: 5px"
               />
-            </b-button> -->
+            </b-button>
             <b-button
-              variant="outline-primary"
+              variant="primary"
               size="lg"
-              class="ml-1"
-              style="font-size: 15px; border-radius: 5px;"
+              class="ml-1 my-1"
+              style="font-size: 15px"
               @click="downloadWarning"
             >
               Download
-              <!-- <feather-icon
+              <feather-icon
                 icon="DownloadIcon"
                 size="18"
                 style="margin-left: 5px"
-              /> -->
+              />
             </b-button>
-            <b-button
-              variant="outline-primary"
-              size="lg"
-              class="ml-1"
-              style="font-size: 15px; border-radius: 5px;"
-            >
-              Share
-              <img src="../assets/images/icons/share.png" />
-            </b-button>
-            <img v-if="!showWarn" src="../assets/images/icons/down_dark.png" style="margin-left: 20px; margin-right: 10px;" />
-            <img v-else src="../assets/images/icons/up_dark.png" style="margin-left: 20px; margin-right: 10px;" />
           </div>
         </div>
-        <div>
-        <!-- <b-collapse id="collapse-warning"> -->
-          <div
-            v-if="showWarn"
-            id="warning"
-            class="pb-2"
+        <div
+          id="warning"
+          class="pb-5"
+        >
+          <h1
+            style="
+              font-family: 'Times New Roman',serif;
+              font-weight: 700;
+              color: red;
+              font-size: 85px;
+            "
           >
-            <h1
-              style="
-                font-family: 'Times New Roman',serif;
-                font-weight: 700;
-                color: red;
-                font-size: 85px;
-              "
-            >
-              Warning:
-            </h1>
-            <h1
-              style="
-                font-family: 'Times New Roman',serif; font-weight: 700; font-size: 43px;
-                color: black;text-align:justify;
-      text-justify:Avenir-word;"
-            >
-              <span
-                class="yellow"
-              >{{
-                ((property.owners || [])[0] || {}).name
-              }} {{ (property.owners || []).length > 1 ? 'AND ______________' : '' }}
-              </span>
-              (THE GRANTEE<span class="yellow">[S]</span> OR PARTY<span
-                class="yellow"
-              >[IES]</span>
-              OF THE SECOND PART IN THIS DEED/INDENTURE/DOCUMENT)
-              <span class="yellow">HAS/HAVE</span> REGISTERED
-              <span class="yellow">ITS/HIS/HER/THEIR</span> IDENTITY<span
-                class="yellow"
-              >(IES)</span>
-              WITH <u>THE DEED REGISTRY LLC D/B/A LANDLOCK</u>. EVERY PROSPECTIVE PURCHASER,
-              MORTGAGEE AND TENANT OF THE SUBJECT PROPERTY AND ALL OTHER INTERESTED PARTIES SHOULD REQUIRE THAT <span
-                class="yellow"
-              >{{
-                ((property.owners || [])[0] || {}).name
-              }} {{ (property.owners || []).length > 1 ? 'AND ______________' : '' }}</span>
-              OBTAIN FROM <u>THE DEED REGISTRY LLC D/B/A LANDLOCK</u>, AND PROVIDE,
-              VERIFICATION<span class="yellow">(S)</span> OF
-              <span class="yellow">ITS/HIS/HER/THEIR</span> IDENTITY<span
-                class="yellow"
-              >(IES)</span>
-              PRIOR TO COMPLETING ANY PURCHASE, MORTGAGE LOAN, Lttar OR OTHER TRANSACTION
-              RANSACTION WITH RESPECT TO THE PROPERTY. SUCH VERIFICATION<span
-                class="yellow"
-              >(S)</span>
-              CAN BE OBTAINED ONLY BY THE REGISTRANT<span class="yellow">(S)</span>
-              <u>FROM THE DEED REGISTRY LLC D/B/A LANDLOCK</u> AT <u>LANDLOCK.US</u>,
-              <u>LANDLOCKUS.COM</u> OR <u>LANDLOCKUSA.COM</u>. SUCH
-              <span
-                style="background: lightgreen"
-              >VERIFICATION(S) CAN BE AUTHENTICATED BY {{ property.generatedID }}.</span>
-            </h1>
-          </div>
-        <!-- </b-collapse> -->
+            Warning:
+          </h1>
+          <h1
+            style="
+              font-family: 'Times New Roman',serif; font-weight: 700; font-size: 43px;
+              color: black;text-align:justify;
+    text-justify:Avenir-word;"
+          >
+            <span
+              class="yellow"
+            >{{
+              ((property.owners || [])[0] || {}).name
+            }} {{ (property.owners || []).length > 1 ? 'AND ______________' : '' }}
+            </span>
+            (THE GRANTEE<span class="yellow">[S]</span> OR PARTY<span
+              class="yellow"
+            >[IES]</span>
+            OF THE SECOND PART IN THIS DEED/INDENTURE/DOCUMENT)
+            <span class="yellow">HAS/HAVE</span> REGISTERED
+            <span class="yellow">ITS/HIS/HER/THEIR</span> IDENTITY<span
+              class="yellow"
+            >(IES)</span>
+            WITH <u>THE DEED REGISTRY LLC D/B/A LANDLOCK</u>. EVERY PROSPECTIVE PURCHASER,
+            MORTGAGEE AND TENANT OF THE SUBJECT PROPERTY AND ALL OTHER INTERESTED PARTIES SHOULD REQUIRE THAT <span
+              class="yellow"
+            >{{
+              ((property.owners || [])[0] || {}).name
+            }} {{ (property.owners || []).length > 1 ? 'AND ______________' : '' }}</span>
+            OBTAIN FROM <u>THE DEED REGISTRY LLC D/B/A LANDLOCK</u>, AND PROVIDE,
+            VERIFICATION<span class="yellow">(S)</span> OF
+            <span class="yellow">ITS/HIS/HER/THEIR</span> IDENTITY<span
+              class="yellow"
+            >(IES)</span>
+            PRIOR TO COMPLETING ANY PURCHASE, MORTGAGE LOAN, Lttar OR OTHER TRANSACTION
+            RANSACTION WITH RESPECT TO THE PROPERTY. SUCH VERIFICATION<span
+              class="yellow"
+            >(S)</span>
+            CAN BE OBTAINED ONLY BY THE REGISTRANT<span class="yellow">(S)</span>
+            <u>FROM THE DEED REGISTRY LLC D/B/A LANDLOCK</u> AT <u>LANDLOCK.US</u>,
+            <u>LANDLOCKUS.COM</u> OR <u>LANDLOCKUSA.COM</u>. SUCH
+            <span
+              style="background: lightgreen"
+            >VERIFICATION(S) CAN BE AUTHENTICATED BY {{ property.generatedID }}.</span>
+          </h1>
         </div>
       </div>
     </div>
@@ -368,7 +402,7 @@
 import { jsPDF } from 'jspdf'
 
 import {
-  BRow, BCol, BSpinner, VBTooltip, BButton, BCollapse
+  BRow, BCol, BSpinner, VBTooltip, BButton,
 } from 'bootstrap-vue'
 import { mapState } from 'vuex'
 import ModalEditProperty from '@/views/components/ModalEditProperty.vue'
@@ -391,7 +425,6 @@ export default {
     ModalVerifCert,
     BSpinner,
     BButton,
-    BCollapse,
     MapImage,
   },
   directives: {
@@ -440,7 +473,6 @@ export default {
       generatingCertificate: false,
       // properties: [],
       dataUrl: null,
-      showWarn: false
     }
   },
   computed: {
@@ -482,9 +514,6 @@ export default {
         this.dataUrl = url
         this.showCertificate()
       })
-    },
-    handleShowWarn () {
-      this.showWarn = !this.showWarn
     },
     showCertificate() {
       console.log(this.url, this.property)

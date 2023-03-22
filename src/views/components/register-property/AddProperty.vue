@@ -1,14 +1,15 @@
 <template>
   <!-- <property-flow-form :adding-property="true" /> -->
   <div>
-    <b-row>
-      <b-col cols="5">
+    <!-- <b-row>
+      <b-col cols="12">
           <Sidebar :step="step" />
       </b-col>
       <b-col cols="7">
 
       </b-col>
-    </b-row>
+    </b-row> -->
+    <Sidebar />
   </div>
 </template>
 
@@ -22,7 +23,7 @@ import {
 } from 'bootstrap-vue'
 import PropertyFlowForm from '@/views/components/register-property/PropertyFlowForm.vue'
 import { mapState } from 'vuex'
-import Sidebar from './Sidebar.vue'
+import Sidebar from './Sidebar/index.vue'
 
 export default {
   components: {

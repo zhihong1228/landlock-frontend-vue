@@ -923,9 +923,9 @@ export default {
     width: 150px;
   }
 
-  .vff-footer div.footer-inner-wrap-child {
-    /*background-color: black;*/
-  }
+  /* .vff-footer div.footer-inner-wrap-child {
+    background-color: black;
+  } */
 
   .vff .f-prev {
     background-color: black;
