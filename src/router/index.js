@@ -211,7 +211,7 @@ const router = new VueRouter({
       component: () => import('@/views/ViewProperty.vue'),
       beforeEnter: multiguard([ifNotExistedToken, ifExpiredToken]),
       meta: {
-        pageTitle: 'Properties',
+        pageTitle: 'Property details',
         breadcrumb: [
           {
             text: 'Properties',

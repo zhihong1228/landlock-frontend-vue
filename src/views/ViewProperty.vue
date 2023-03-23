@@ -91,8 +91,9 @@
                   variant="primary"
                   class="common-btn"
                   style="width: 50%; border-radius: 5px; margin-top: 30px;"
-                  @click="generateCertificate"
+                  @click="$bvModal.show('generate-certificate-modal')"
                 >
+                  <!-- @click="generateCertificate" -->
                   <span class="color-light">Generate certificate</span>
                 </b-button>
               </div>
@@ -331,6 +332,37 @@
             <!-- </h1> -->
           </div>
         <!-- </b-collapse> -->
+          <b-modal id="generate-certificate-modal" size="lg" centered hide-footer hide-header style="padding: 20px">
+            <!-- <template #modal-title>
+              <div class="d-flex flex-column" style="width: 100%;">
+                <div class="d-flex flex-row justify-content-around">
+                  <header-step :status="'active'" :stepValue="1" />
+                  <header-step :status="`${certStep > 1 ? 'active': 'progress'}`" :stepValue="0" />
+                  <header-step :status="`${certStep > 1 ? 'active' : 'deactive'}`" :stepValue="2" />
+                  <header-step :status="`${certStep > 2 ? 'active': `${certStep === 2 ? 'progress' : 'deactive'}`}`" :stepValue="0" />
+                </div>
+                <div style="background-color: #D9DBE9; height: 2px; width: 100%;" />
+              </div>
+            </template> -->
+            <div class="d-flex flex-column mx-3 my-2">
+              <div class="d-flex flex-row justify-content-around align-items-center mb-2">
+                <header-step :status="'active'" :stepValue="1" />
+                <header-step :status="`${certStep > 1 ? 'active': 'progress'}`" :stepValue="0" />
+                <header-step :status="`${certStep > 1 ? 'active' : 'deactive'}`" :stepValue="2" />
+                <header-step :status="`${certStep > 2 ? 'active': `${certStep === 2 ? 'progress' : 'deactive'}`}`" :stepValue="0" />
+                <header-step :status="`${certStep > 2 ? 'active' : 'deactive'}`" :stepValue="3" />
+                <header-step :status="`${certStep > 3 ? 'active': `${certStep === 3 ? 'progress' : 'deactive'}`}`" :stepValue="0" />
+                <header-step :status="`${certStep > 3 ? 'active' : 'deactive'}`" :stepValue="4" />
+              </div>
+              <div style="background-color: #D9DBE9; height: 2px; width: 100%;" />
+            </div>
+            <div class="d-block text-center mx-3 my-2">
+              <disclaimer v-if="certStep===1" @continue="handleContinue" />
+              <general-info v-if="certStep===2" @continue="handleContinue" />
+              <security-ques v-if="certStep===3" @continue="handleContinue" />
+              <last v-if="certStep===4" @continue="handleContinue" />
+            </div>
+          </b-modal>
         </div>
       </div>
     </div>
@@ -364,7 +396,7 @@
 import { jsPDF } from 'jspdf'
 
 import {
-  BRow, BCol, BSpinner, VBTooltip, BButton, BCollapse
+  BRow, BCol, BSpinner, VBTooltip, BButton, BCollapse, BModal
 } from 'bootstrap-vue'
 import { mapState } from 'vuex'
 import ModalEditProperty from '@/views/components/ModalEditProperty.vue'
@@ -376,6 +408,12 @@ import QRCode from 'qrcode'
 import format from 'date-fns/format'
 import { addMonths } from 'date-fns'
 import PropertyService from '../services/PropertyService'
+
+import HeaderStep from '@/views/components/certificate/HeaderStep.vue'
+import Disclaimer from '@/views/components/certificate/Disclaimer.vue'
+import GeneralInfo from '@/views/components/certificate/GeneralInfo.vue'
+import SecurityQues from '@/views/components/certificate/SecurityQues.vue'
+import Last from '@/views/components/certificate/Last.vue'
 
 export default {
   components: {
@@ -389,6 +427,12 @@ export default {
     BButton,
     BCollapse,
     MapImage,
+    BModal,
+    HeaderStep,
+    Disclaimer,
+    GeneralInfo,
+    SecurityQues,
+    Last
   },
   directives: {
     'b-tooltip': VBTooltip,
@@ -436,7 +480,8 @@ export default {
       generatingCertificate: false,
       // properties: [],
       dataUrl: null,
-      showWarn: false
+      showWarn: false,
+      certStep: 1
     }
   },
   computed: {
@@ -478,6 +523,13 @@ export default {
         this.dataUrl = url
         this.showCertificate()
       })
+    },
+    handleContinue ()  {
+      if(this.certStep === 4) {
+        this.certStep = 1
+      } else {
+        this.certStep += 1
+      }
     },
     handleShowWarn () {
       this.showWarn = !this.showWarn

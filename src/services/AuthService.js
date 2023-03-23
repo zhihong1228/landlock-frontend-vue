@@ -19,7 +19,7 @@ class AuthService {
   }
 
   isConfirmed(data) {
-    return http.post('auth/isConfirmed', data)
+    return http.post('auth/confirmEmail', data)
   }
 
   register(data) {

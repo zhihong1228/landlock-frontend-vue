@@ -237,23 +237,25 @@ export default {
               userId: this.user.id,
             }
             this.verifying = true
+
             AuthService.confirmMobile(data)
               .then(response => {
-                console.log(response)
-                this.$toast({
-                  component: ToastificationContent,
-                  position: 'top-center',
-                  props: {
-                    title: 'Mobile number updated Successfully!',
-                    icon: 'CheckIcon',
-                    variant: 'success',
-                  },
-                })
+                console.log("mobile confirm response: ", response)
+                // this.$toast({
+                //   component: ToastificationContent,
+                //   position: 'top-center',
+                //   props: {
+                //     title: 'Mobile number updated Successfully!',
+                //     icon: 'CheckIcon',
+                //     variant: 'success',
+                //   },
+                // })
                 this.verifying = false
                 this.updateUser({
                   ...this.user,
-                  mobile: this.mobile,
+                  // mobile: this.mobile,
                   confirmedMobile: true,
+                  // step2: 'complete'
                 })
                 this.$router.push('/identity-verification')
                 resolve(true)

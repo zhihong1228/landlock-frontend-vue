@@ -83,7 +83,7 @@ import {
 } from 'bootstrap-vue'
 import Ripple from 'vue-ripple-directive'
 import { heightTransition } from '@core/mixins/ui/transition'
-import { mapState } from 'vuex'
+import { mapMutations, mapState } from 'vuex'
 // import PropertyService from '@/services/PropertyService'
 import AuthService from '../../../services/AuthService'
 import { errMessage } from '../../../utils/errMessage'
@@ -118,6 +118,9 @@ export default {
   },
 
   methods: {
+    ...mapMutations({
+      updateUser: 'user/UPDATE_USER',
+    }),
     handleEmit() {
       // this.$emit('next', 2)
       if(this.code)
@@ -148,7 +151,16 @@ export default {
       let isconf
       try {
         this.verifying = true
-        const { data: response } = await AuthService.isConfirmed({ userId: this.$store.state.user.user.id, otpCode: this.code })
+
+        AuthService.isConfirmed({ userId: this.$store.state.user.user.id, otpCode: this.code, email: this.$store.state.user.user.email })
+          .then(res => {
+            console.log("email confirm response: ", res)
+            this.updateUser({
+              ...this.user,
+              // mobile: this.mobile,
+              confirmedEmail: true,
+            })
+          })
           .catch(error => {
             this.messageEr = errMessage(error)
             // this.$toast({
@@ -161,9 +173,9 @@ export default {
             // })
           })
           .finally(() => {
-            this.verifying = false
+            // this.verifying = false
           })
-        isconf = response.data.confirmedEmail
+        // isconf = response.data.confirmedEmail
       } catch (e) {
         this.verifying = false
         this.messageEr = errMessage(e)
@@ -176,7 +188,7 @@ export default {
         //   },
         // })
       }
-      return isconf
+      // return isconf
     },
     async resendEmail() {
       this.resendingEmail = true

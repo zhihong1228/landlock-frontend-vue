@@ -56,6 +56,29 @@
           </h2>
         </b-link>
       </li>
+      <li
+        v-else
+        class="nav-item"
+      >
+        <b-link
+          class="navbar-brand d-flex flex-row align-items-center"
+          to="/"
+        >
+          <span
+            class="d-flex align-items-center justify-content-center"
+            style="background-color: #F8F8F8; border-radius: 99px; width: 62px; height: 48px; margin-right: 20px;"
+          >
+            <b-img
+              style="width: 30px; height: 30px;"
+              src="../../assets/images/icons/back-dark.png"
+              alt="back"
+            />
+          </span>
+          <h2 class="brand-text mb-0 color-dark">
+            {{ $route.meta.pageTitle }}
+          </h2>
+        </b-link>
+      </li>
 
     </ul>
 

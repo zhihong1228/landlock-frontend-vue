@@ -977,18 +977,18 @@ export default {
     document.body.classList.remove('bluebody')
   },
   created() {
-    this.questions = this.questions.map(q => {
-      if (q.id === 'FirstName') {
-        // eslint-disable-next-line no-param-reassign
-        q.answer = this.user.firstName
-      } else if (q.id === 'LastName') {
-        // eslint-disable-next-line no-param-reassign
-        q.answer = this.user.lastName
-      }
-      return q
-    })
-    const firstSQIndex = this.questions.findIndex(item => item.id === 'security_questions_1')
-    this.questions[firstSQIndex].questions[0].options = this.securityQuestions
+    // this.questions = this.questions.map(q => {
+    //   if (q.id === 'FirstName') {
+    //     // eslint-disable-next-line no-param-reassign
+    //     q.answer = this.user.firstName
+    //   } else if (q.id === 'LastName') {
+    //     // eslint-disable-next-line no-param-reassign
+    //     q.answer = this.user.lastName
+    //   }
+    //   return q
+    // })
+    // const firstSQIndex = this.questions.findIndex(item => item.id === 'security_questions_1')
+    // this.questions[firstSQIndex].questions[0].options = this.securityQuestions
   },
   methods: {
     ...mapMutations({
