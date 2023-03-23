@@ -129,5 +129,11 @@ export default {
   font-weight: 700;
   font-style: normal;
 }
+@font-face {
+  font-family: 'Avenir-Bolder';
+  src: url('./assets/fonts/AvenirNextLTPro-ExtraBold.otf') format('opentype');
+  font-weight: 900;
+  font-style: normal;
+}
 
 </style>

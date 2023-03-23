@@ -281,58 +281,54 @@
             id="warning"
             class="pb-2"
           >
-            <h1
-              style="
-                font-family: 'Times New Roman',serif;
-                font-weight: 700;
-                color: red;
-                font-size: 85px;
-              "
+            <div class="d-flex flex-row">
+              <h1
+                style="
+                  font-family: 'Times New Roman',serif;
+                  font-weight: 500;
+                  color: red;
+                  font-size: 85px;
+                  margin-right: 20px;
+                "
+              >
+                STOP
+              </h1>
+              <img src="../assets/images/pages/stop.png" style="width: 90px; height: 90px;" />
+            </div>
+            <!-- <h1
+              class="f-bold"
+              style="font-size: 39px; color: black;text-align:justify; text-justify: Avenir-word;"
+            > -->
+            <div
+              class="d-flex flex-column f-bolder"
+              style="font-size: 33px; color: black;text-align:justify; text-justify: Avenir-word;"
             >
-              Warning:
-            </h1>
-            <h1
-              style="
-                font-family: 'Times New Roman',serif; font-weight: 700; font-size: 43px;
-                color: black;text-align:justify;
-      text-justify:Avenir-word;"
-            >
-              <span
-                class="yellow"
-              >{{
-                ((property.owners || [])[0] || {}).name
-              }} {{ (property.owners || []).length > 1 ? 'AND ______________' : '' }}
+              <span class="mb-1" style="text-decoration: underline; font-size: 43px; line-height: 60px;">
+                FAILURE TO HEED THIS WARNING COULD RESULT IN LEGAL CONSEQUENCES.<br />
               </span>
-              (THE GRANTEE<span class="yellow">[S]</span> OR PARTY<span
-                class="yellow"
-              >[IES]</span>
-              OF THE SECOND PART IN THIS DEED/INDENTURE/DOCUMENT)
-              <span class="yellow">HAS/HAVE</span> REGISTERED
-              <span class="yellow">ITS/HIS/HER/THEIR</span> IDENTITY<span
-                class="yellow"
-              >(IES)</span>
-              WITH <u>THE DEED REGISTRY LLC D/B/A LANDLOCK</u>. EVERY PROSPECTIVE PURCHASER,
-              MORTGAGEE AND TENANT OF THE SUBJECT PROPERTY AND ALL OTHER INTERESTED PARTIES SHOULD REQUIRE THAT <span
-                class="yellow"
-              >{{
-                ((property.owners || [])[0] || {}).name
-              }} {{ (property.owners || []).length > 1 ? 'AND ______________' : '' }}</span>
-              OBTAIN FROM <u>THE DEED REGISTRY LLC D/B/A LANDLOCK</u>, AND PROVIDE,
-              VERIFICATION<span class="yellow">(S)</span> OF
-              <span class="yellow">ITS/HIS/HER/THEIR</span> IDENTITY<span
-                class="yellow"
-              >(IES)</span>
-              PRIOR TO COMPLETING ANY PURCHASE, MORTGAGE LOAN, Lttar OR OTHER TRANSACTION
-              RANSACTION WITH RESPECT TO THE PROPERTY. SUCH VERIFICATION<span
-                class="yellow"
-              >(S)</span>
-              CAN BE OBTAINED ONLY BY THE REGISTRANT<span class="yellow">(S)</span>
-              <u>FROM THE DEED REGISTRY LLC D/B/A LANDLOCK</u> AT <u>LANDLOCK.US</u>,
-              <u>LANDLOCKUS.COM</u> OR <u>LANDLOCKUSA.COM</u>. SUCH
-              <span
-                style="background: lightgreen"
-              >VERIFICATION(S) CAN BE AUTHENTICATED BY {{ property.generatedID }}.</span>
-            </h1>
+              <span class="mb-1" style="text-decoration: underline; font-size: 45px;">
+                DO NOT IGNORE THIS WARNING!<br />
+              </span>
+              <span class="mb-1" style="text-decoration: underline; font-size: 45px;">
+                IF YOU IGNORE THIS WARNING, YOU MAY BE SUBJECTED TO PROPERTY THEFT WHEN YOU PURCHASE, LEASE OR MORTGAGE THIS PROPERTY.<br />
+              </span>
+              <span class="mb-1">
+                TO HELP PREVENT THEFT OF THIS PROPERTY, __________________
+                &nbsp;&nbsp;&nbsp; REGISTERED HIS/HER IDENTIFY WITH LANDLOCK, INC.<br />
+              </span>
+              <span class="mb-1">
+                DO NOT PURCHASE, RENT OR MORTGAGE THIS PROPERTY UNLESS AND UNTIL __________________
+                VERIFIES HIS/HER IDENTIFY WITH LANDLOCK, INC.
+              </span>
+              <span class="mb-1">
+                TO VERIFY __________________'S IDENTIFY, __________________
+                MUST GO TO <a href="#" style="text-decoration: underline;">LANDLOCK.US</a> TO GENERATE A CERTIFICATE THAT VERIFIES HIS/HER IDENTIFY.<br />
+              </span>
+              <span style="font-size: 24px;">
+                FOR MORE INFORMATION ABOUT LANDLOCK, INC. PLEASE VISIT <a href="#" style="text-decoration: underline;">WWW.LANDLOCK.US</a>
+              </span>
+            </div>
+            <!-- </h1> -->
           </div>
         <!-- </b-collapse> -->
         </div>
